@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Juliya's Prompts Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* === 🎨 MAGIC DESIGN SYSTEM === */
+    :root {
+      --primary: #6ab0f3;
+      --primary-2: #4ecdc4;
+      --primary-glow: rgba(106, 176, 243, 0.5);
+      --bg-1: #0a0a1a;
+      --bg-2: #0f0c29;
+      --bg-3: #1a1a3e;
+      --card: rgba(26, 26, 58, 0.9);
+      --card-border: rgba(106, 176, 243, 0.3);
+      --text: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.75);
+      --font: 'Fredoka', sans-serif;
+      --radius: 18px;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font);
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    /* ✨ Floating Particles */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .particle {
+      position: absolute;
+      width: var(--s, 4px); height: var(--s, 4px);
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      border-radius: 50%;
+      opacity: var(--o, 0.7);
+      animation: floatUp var(--d, 10s) linear infinite;
+      filter: blur(0.3px);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+      10% { opacity: var(--o); }
+      90% { opacity: var(--o); }
+      100% { transform: translateY(-20vh) rotate(720deg) scale(1.2); opacity: 0; }
+    }
+
+    /* ✨ Twinkling Stars */
+    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+    .star {
+      position: absolute; width: 2px; height: 2px;
+      background: white; border-radius: 50%;
+      animation: twinkle var(--d, 3s) ease-in-out infinite;
+      opacity: var(--o, 0.7);
+      box-shadow: 0 0 8px rgba(255,255,255,0.5);
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: var(--o); transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* 🧚 Floating Fairy */
+    .fairy {
+      position: fixed; bottom: 30px; right: 30px;
+      font-size: 2.3rem;
+      animation: fairyFloat 3.5s ease-in-out infinite, fairyGlow 2.5s ease-in-out infinite;
+      z-index: 15; cursor: default;
+      filter: drop-shadow(0 0 18px var(--primary-glow));
+      user-select: none;
+    }
+    @keyframes fairyFloat {
+      0%,100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-20px) rotate(4deg); }
+    }
+    @keyframes fairyGlow {
+      0%,100% { filter: drop-shadow(0 0 18px var(--primary-glow)); }
+      50% { filter: drop-shadow(0 0 30px var(--primary-glow)); }
+    }
+
+    /* 🌟 Floating Icons */
+    .float-icon {
+      position: fixed; font-size: 1.6rem; opacity: 0.85;
+      animation: iconFloat 4.5s ease-in-out infinite;
+      pointer-events: none; z-index: 2;
+      filter: drop-shadow(0 0 10px var(--primary-glow));
+    }
+    @keyframes iconFloat {
+      0%,100% { transform: translateY(0) rotate(0deg) scale(1); }
+      50% { transform: translateY(-25px) rotate(12deg) scale(1.05); }
+    }
+
+    /* ✨ Floating Orbs */
+    .orb {
+      position: fixed; border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-glow), transparent 70%);
+      animation: orbFloat 8s ease-in-out infinite;
+      pointer-events: none; z-index: 0;
+    }
+    @keyframes orbFloat {
+      0%,100% { transform: translate(0,0) scale(1); opacity: 0.4; }
+      50% { transform: translate(var(--tx,20px), var(--ty,-20px)) scale(1.3); opacity: 0.7; }
+    }
+
+    /* 🏗️ Layout */
+    .container { max-width: 950px; margin: 0 auto; padding: 20px; position: relative; z-index: 10; }
+
+    /* 🔘 Header */
+    .header {
+      display: flex; justify-content: flex-end; gap: 12px;
+      padding: 15px 0 20px; position: sticky; top: 0;
+      background: linear-gradient(to bottom, rgba(10,10,26,0.95), transparent);
+      z-index: 30; backdrop-filter: blur(5px);
+    }
+    .icon-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 2px solid var(--primary);
+      background: rgba(106,176,243,0.15); color: var(--primary);
+      font-size: 1.2rem; cursor: pointer;
+      display: grid; place-items: center;
+      transition: all 0.3s var(--ease); position: relative; overflow: hidden;
+    }
+    .icon-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .icon-btn:hover {
+      color: var(--bg-1); transform: scale(1.12) rotate(5deg);
+      box-shadow: 0 0 25px var(--primary-glow);
+    }
+    .icon-btn:hover::before { opacity: 1; }
+
+    /* 🎯 MAIN TITLE */
+    .main-title { text-align: center; padding: 35px 15px 40px; animation: titleIn 0.8s var(--ease); }
+    @keyframes titleIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    .title-big {
+      font-size: 3.3rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2), #a8e6ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin: 12px 0; letter-spacing: 0.5px;
+      text-shadow: 0 0 30px var(--primary-glow);
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+    @keyframes titleGlow {
+      0%,100% { text-shadow: 0 0 30px var(--primary-glow); }
+      50% { text-shadow: 0 0 50px var(--primary-glow), 0 0 75px var(--primary-glow); }
+    }
+    .title-sub { font-size: 1.1rem; color: var(--text-dim); max-width: 520px; margin: 0 auto; opacity: 0.9; }
+
+    /* 🗂️ Cards Grid */
+    .cards-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: 24px; 
+      padding: 10px 0 40px; 
+    }
+
+    /* 🃏 Beautiful Card */
+    .card {
+      background: var(--card); border: 2px solid var(--card-border);
+      border-radius: var(--radius); padding: 24px;
+      transition: all 0.35s var(--ease); display: flex; flex-direction: column;
+      position: relative; overflow: hidden; animation: cardIn 0.6s var(--ease) both;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(106,176,243,0.1), transparent);
+      transition: left 0.5s;
+    }
+    .card:hover::before { left: 100%; }
+    .card:hover {
+      border-color: var(--primary); transform: translateY(-7px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px var(--primary-glow);
+    }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+    .card:nth-child(1) { animation-delay: 0.15s; }
+    .card:nth-child(2) { animation-delay: 0.25s; }
+    .card:nth-child(3) { animation-delay: 0.35s; }
+    .card:nth-child(4) { animation-delay: 0.45s; }
+    .card:nth-child(5) { animation-delay: 0.55s; }
+    .card:nth-child(6) { animation-delay: 0.65s; }
+
+    /* Card Header */
+    .card-head {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 16px; padding-bottom: 15px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .card-emoji {
+      font-size: 2.2rem; animation: emojiBounce 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px var(--primary-glow));
+    }
+    @keyframes emojiBounce {
+      0%,100% { transform: scale(1) rotate(0); }
+      50% { transform: scale(1.15) rotate(3deg); }
+    }
+    .card-title {
+      font-size: 1.35rem; font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Card Description */
+    .card-desc { font-size: 0.96rem; color: var(--text-dim); margin-bottom: 18px; flex-grow: 1; line-height: 1.65; }
+    .card-desc strong { color: var(--text); }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+    .tag {
+      background: rgba(106,176,243,0.15); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 4px 11px;
+      font-size: 0.8rem; font-weight: 500; color: var(--primary);
+      transition: all 0.25s var(--ease);
+    }
+    .tag:hover { background: var(--primary); color: var(--bg-1); transform: translateY(-2px); }
+
+    /* Buttons */
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .btn {
+      flex: 1; min-width: 115px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: var(--bg-1); border: none; padding: 11px 15px;
+      font-family: var(--font); font-size: 0.92rem; font-weight: 600;
+      border-radius: 12px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all 0.3s var(--ease); position: relative; overflow: hidden;
+      box-shadow: 0 5px 20px var(--primary-glow);
+    }
+    .btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: translateX(-100%); transition: transform 0.4s;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px var(--primary-glow); }
+    .btn:hover::after { transform: translateX(100%); }
+    .btn.out { background: transparent; border: 2px solid var(--primary); color: var(--primary); box-shadow: none; }
+    .btn.out:hover { background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: var(--bg-1); }
+    .btn.copied { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
+
+    /* Toggle */
+    .toggle {
+      background: none; border: none; color: var(--primary);
+      font-family: var(--font); font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; padding: 7px 0;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      transition: all 0.25s var(--ease); opacity: 0.9;
+    }
+    .toggle:hover { opacity: 1; text-shadow: 0 0 12px var(--primary-glow); }
+
+    /* Prompt Code Block */
+    .code {
+      background: rgba(10,10,26,0.95); border: 1px solid var(--card-border);
+      border-radius: 13px; padding: 17px;
+      font-family: var(--font); font-size: 0.87rem; line-height: 1.55;
+      max-height: 420px; overflow-y: auto; white-space: pre-wrap; word-break: break-word;
+      margin-top: 12px; display: none; color: var(--text-dim);
+      animation: codeIn 0.35s var(--ease);
+    }
+    @keyframes codeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .code.show { display: block; }
+    .code .c { color: #6a9955; }
+    .code .k { color: var(--primary); font-weight: 500; }
+    .code .s { color: #ce9178; }
+    .code .n { color: #b5cea8; }
+    .code .sec { color: var(--primary-2); font-weight: 600; display: block; margin: 10px 0 5px; text-shadow: 0 0 8px var(--primary-glow); }
+    .code .div { color: var(--card-border); display: block; margin: 7px 0; }
+
+    /* 📚 More Section */
+    .more { text-align: center; padding: 30px 0 45px; animation: fadeIn 0.7s var(--ease) 0.4s both; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .more-title {
+      font-size: 1.4rem; font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 14px;
+    }
+    .coming {
+      background: var(--card); border: 1px dashed var(--card-border);
+      border-radius: var(--radius); padding: 24px 20px;
+      max-width: 480px; margin: 0 auto; color: var(--text-dim); font-size: 0.96rem;
+      transition: all 0.3s var(--ease);
+    }
+    .coming:hover { border-color: var(--primary); box-shadow: 0 0 30px var(--primary-glow); }
+    .coming .ic { font-size: 2.5rem; margin-bottom: 14px; animation: emojiBounce 2.4s ease-in-out infinite; }
+
+    /* 📱 Footer */
+    footer { text-align: center; padding: 30px 15px 50px; color: var(--text-dim); font-size: 0.93rem; animation: fadeIn 0.7s var(--ease) 0.5s both; }
+    footer a { color: var(--primary); text-decoration: none; transition: all 0.25s var(--ease); position: relative; }
+    footer a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--primary); transition: width 0.25s; }
+    footer a:hover { text-shadow: 0 0 12px var(--primary-glow); }
+    footer a:hover::after { width: 100%; }
+
+    /* 🍞 Toast */
+    #toast {
+      position: fixed; bottom: 30px; left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: var(--bg-1); padding: 12px 26px; border-radius: 50px;
+      font-weight: 600; font-family: var(--font);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 25px var(--primary-glow);
+      z-index: 1000; opacity: 0; pointer-events: none;
+      transition: all 0.35s var(--ease);
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ✨ Sparkle */
+    .sparkle {
+      position: fixed; width: 8px; height: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2), #fff);
+      border-radius: 50%; pointer-events: none;
+      animation: sparkleAnim 0.65s ease-out forwards; z-index: 999;
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+    @keyframes sparkleAnim {
+      0% { transform: scale(0) rotate(0deg); opacity: 1; }
+      100% { transform: scale(2.5) rotate(180deg); opacity: 0; }
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 650px) {
+      .title-big { font-size: 2.4rem; }
+      .title-sub { font-size: 1.05rem; }
+      .card { padding: 20px; }
+      .card-title { font-size: 1.2rem; }
+      .btn { min-width: 100%; }
+      .btns { flex-direction: column; }
+      .code { font-size: 0.84rem; max-height: 380px; }
+      .fairy { font-size: 1.9rem; bottom: 20px; right: 20px; }
+      .float-icon { font-size: 1.3rem; }
+    }
+
+    /* ♿ Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    button:focus-visible, .icon-btn:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary), var(--primary-2)); border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <!-- ✨ Background -->
+  <div class="particles" id="particles"></div>
+  <div class="stars" id="stars"></div>
+  <div class="fairy" aria-hidden="true">🧚✨</div>
+  <div class="float-icon" style="top:10%;left:5%;animation-delay:0s">🎡</div>
+  <div class="float-icon" style="top:22%;right:7%;animation-delay:0.7s">✨</div>
+  <div class="float-icon" style="top:55%;left:3%;animation-delay:1.4s">🪄</div>
+  <div class="float-icon" style="bottom:32%;right:5%;animation-delay:0.3s">🎯</div>
+  <div class="float-icon" style="top:40%;left:8%;animation-delay:1s;font-size:1.3rem">💫</div>
+  <div class="orb" style="width:120px;height:120px;top:15%;right:10%;--tx:30px;--ty:-30px"></div>
+  <div class="orb" style="width:80px;height:80px;bottom:25%;left:8%;--tx:-25px;--ty:25px;animation-delay:2s"></div>
+
+  <!-- 🔘 Header -->
+  <div class="header">
+    <button class="icon-btn" id="copyAllBtn" title="Копировать всё" aria-label="Копировать">📋</button>
+    <a class="icon-btn" href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank" title="Сайт" aria-label="Главный сайт">🏰</a>
+  </div>
+
+  <div class="container">
+    
+    <!-- 🎯 Title -->
+    <header class="main-title">
+      <h1 class="title-big">✨ Juliya's Prompts Collection</h1>
+      <p class="title-sub">Волшебные промпты для создания интерактивных игр • Копируй • Вставляй • Твори магию</p>
+    </header>
+
+    <!-- 🗂️ Cards Grid -->
+    <div class="cards-grid">
+      
+      <!-- 🎡 Card 1: Spin & Learn -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🎡</span>
+          <h2 class="card-title">Spin & Learn</h2>
+        </div>
+        <p class="card-desc"><strong>Интерактивное колесо вопросов.</strong><br>Ученики крутят колесо и отвечают на вопросы. Один HTML-файл, работает офлайн.</p>
+        <div class="tags">
+          <span class="tag">🎯 Wheel</span>
+          <span class="tag">👨‍🏫 Teacher</span>
+          <span class="tag">📦 Single HTML</span>
+          <span class="tag">🔌 Offline</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="prompt1">📋 Копировать</button>
+          <button class="btn out" data-download="prompt1">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="prompt1">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt1">Create an interactive browser-based educational wheel game called "[GAME_TITLE]" for language learning or classroom activities. The game must be fully self-contained (single HTML file with embedded CSS and JS).
+
+🎨 TEACHER CUSTOMIZATION PANEL — EDIT(РЕДАКТИРОВАТЬ) ONLY THIS SECTION:
+================================================================
+[GAME_TITLE] = "Career Quest Wheel"                    // ← Change game name
+[GAME_SUBTITLE] = "Spin the wheel! Answer & learn! ✨" // ← Short description
+[THEME_COLORS] = {                                     // ← Optional: change colors
+  primary: "#ffd700",      // golden accent
+  background: ["#1a1a2e", "#16213e", "#0f0c29"], // gradient
+  segments: ["#9b59b6", "#3498db", "#2ecc71", "#e67e22", "#1abc9c", "#f1c40f", "#e91e63"]
+}
+[SEGMENT_COUNT] = 7                                    // ← Number of questions (5-12 recommended)
+[QUESTIONS] = [                                        // ← EDIT YOUR QUESTIONS HERE
+  " QUESTION 1",
+  " QUESTION 2",
+  " QUESTION 3",
+  " QUESTION 4",
+  " QUESTION 5",
+  " QUESTION 6",
+  " QUESTION 7"
+]
+[RESULT_BOX_LABEL] = "Your question appears here... 🪄" // ← Placeholder text
+[COMPLETION_MESSAGE] = "🎉 Amazing! You've answered all questions!" // ← End game text
+[AUDIO_ENABLED] = true                                 // ← Set false to disable sound
+[FONT_FAMILY] = "'Fredoka', sans-serif"                // ← Change font if needed
+================================================================
+
+🎨 DESIGN & ATMOSPHERE (auto-generated from panel above):
+- Background: gradient from [THEME_COLORS.background]
+- Accent color: [THEME_COLORS.primary] with glow effects
+- Font: [FONT_FAMILY]
+- Animated twinkling stars background (80+ elements)
+- Optional magical element: animated fairy 🧚✨ or theme-appropriate icon
+- Control buttons: 🔇 mute toggle + 🏰 home button (top-right)
+- All interactive elements with smooth hover animations
+
+🎡 THE WHEEL (auto-calculated):
+- Circular wheel, 500px diameter (responsive for mobile)
+- [SEGMENT_COUNT] colored segments using conic-gradient from [THEME_COLORS.segments]
+- Golden pointer marker at top with pulsing animation
+- Center hub: 🎯 or theme-appropriate emoji
+- Each segment displays one question from [QUESTIONS] array
+- Question text boxes: auto-positioned along radius, auto-rotated for readability
+
+🔄 GAME LOGIC:
+1. On load: all [SEGMENT_COUNT] questions available
+2. Button "[GAME_TITLE] — SPIN!" triggers rotation:
+   - 5-8 full spins + random offset
+   - Smooth deceleration (cubic-bezier easing)
+   - Optional "tick" sounds during spin (if [AUDIO_ENABLED] = true)
+3. After wheel stops:
+   - Wheel auto-aligns to nearest segment center
+   - ✅ KEY: Selected question appears in SEPARATE FIELD below wheel (result-box)
+   - Selected segment on wheel gets highlight glow
+   - Optional magic sound plays
+4. Button changes to "✅ Answered! Next ➜"
+5. On second click:
+   - Question marked as used (fades from wheel, progress dot updates)
+   - Optional confetti animation 🎉
+   - Button resets for next spin
+6. When all questions completed:
+   - Show modal: "[COMPLETION_MESSAGE]"
+   - "🔄 Start New Game" button resets everything
+
+🔊 AUDIO SYSTEM (if [AUDIO_ENABLED] = true):
+- Use Web Audio API only — NO external files
+- playClick(): short tone for wheel ticks
+- playMagicChime(): pleasant chord when question selected
+- playFanfare(): celebration sound when question answered
+- 🔇/🔊 toggle button included
+- AudioContext initialized on first user click (browser compliance)
+
+📊 PROGRESS & UI:
+- Progress indicator: "Questions left: [dots] X/[SEGMENT_COUNT]"
+- Dot states: gold (available) → gray (used) → glowing (active)
+- Result display field (result-box):
+  * Shows label: "[RESULT_BOX_LABEL]" when empty
+  * Displays selected question with fade-in + slide-up animation
+  * Golden border glow when active
+  * Clears after "✅ Answered!" clicked
+- Fully responsive: scales for <600px and <420px screens
+
+🎯 CRITICAL REQUIREMENT:
+After spin, the selected question MUST appear in a dedicated, visually distinct field (result-box) below the wheel — this is the main reading area for students. It must:
+- Have smooth entrance animation
+- Feature accent-color border when active
+- Clear after user confirms answer
+- Be empty state labeled with [RESULT_BOX_LABEL]
+
+📦 TECHNICAL SPECIFICATIONS:
+- Single HTML file, zero external dependencies (except Google Fonts if used)
+- Vanilla JavaScript, no frameworks
+- CSS animations via @keyframes
+- Confetti: 60 particles with randomized properties (if enabled)
+- Keyboard support: Space/Enter for spin/answer
+- State management: isSpinning, gameState, availableQuestions/usedQuestions arrays
+
+✨ POLISH & ACCESSIBILITY:
+- Button shine effect on hover
+- Subtle pulse animations to guide attention
+- Used questions fade smoothly from wheel
+- High contrast text for readability
+- ARIA labels for buttons (accessibility)
+- Overall magical/friendly aesthetic — feels like play, not a test
+
+Generate complete, production-ready code. At the TOP of the JavaScript section, create a clearly marked "🎓 TEACHER SETTINGS" object that mirrors the Customization Panel above, so teachers can edit questions/settings without touching game logic. Add comments like "// ✏️ EDIT QUESTIONS BELOW" for easy navigation.</div>
+      </article>
+
+      <!-- ⭕ Card 2: Tic Tac Toe -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">⭕</span>
+          <h2 class="card-title">Tic Tac Toe</h2>
+        </div>
+        <p class="card-desc"><strong>Крестики-нолики с викториной!</strong><br>Ответь на вопрос — сделай ход. Магическая тема, настройки, ИИ, сохранение счёта. Один файл, работает офлайн.</p>
+        <div class="tags">
+          <span class="tag">⭕ Tic Tac Toe</span>
+          <span class="tag">❓ Quiz Gate</span>
+          <span class="tag">🤖 Vs AI</span>
+          <span class="tag">🔐 Offline</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="prompt2">📋 Копировать</button>
+          <button class="btn out" data-download="prompt2">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="prompt2">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt2">Create a responsive, mobile-first web game with the following specifications:
+
+🎮 GAME CONCEPT
+A Tic-Tac-Toe style web game where players must answer a quiz question before making each move. Theme: "Magic Quest" — mystical, educational, fun, and fully customizable.
+
+🎨 DESIGN REQUIREMENTS
+- Modern glassmorphism UI with CSS custom properties (variables) for easy theming
+- Animated background: twinkling stars + subtle gradient shift
+- Smooth animations: hover lifts, pop-in glyphs, victory confetti
+- Fully responsive: mobile-first, works from 320px width, touch-friendly
+- Accessible: keyboard navigation, ARIA labels, focus rings, prefers-reduced-motion support
+- Color palette (CSS variables):
+  --bg-deep: #0f0c29;
+  --bg-mid: #302b63;
+  --accent-primary: #ff6b9d;
+  --accent-secondary: #7b68ee;
+  --accent-gold: #ffd93d;
+  --success: #00d9a5;
+  --error: #ff6b6b;
+
+⚙️ CORE FEATURES
+1. Game Board: 3x3 grid, players alternate placing X/O (or themed glyphs)
+2. Quiz Gate: Before each move, a modal quiz appears — player must answer to proceed
+3. Settings Panel (modal dialog):
+   - Toggle quiz on/off
+   - Choose glyph theme: Standard (X/O) / Magic (✨/🌙) / Knight (⚔/🛡)
+   - Game mode: 2 Players / Vs AI
+   - AI difficulty: Perfect / Pragmatic / Reckless (if vs AI)
+   - Choose who starts: Player 1 / Player 2
+4. Score Tracking: Display wins for P1, P2, and draws; persist in localStorage
+5. Feedback System: 
+   - Correct answer: green highlight + positive message + mini confetti
+   - Incorrect answer: red highlight + encouraging message + show correct answer
+   - Allow up to 3 attempts per question, then auto-proceed (mercy rule)
+6. Victory Effects: Full-screen confetti + animated banner with winner message
+
+❓ QUESTION SYSTEM — ✏️ UNIVERSAL TEMPLATE (JUST ADD YOUR QUESTIONS) ✏️
+
+Questions must be stored in a simple, editable JavaScript array. Use this EXACT structure:
+
+// 🎯🎯🎯 HOW TO SPECIFY THE CORRECT ANSWER 🎯🎯🎯
+// FORMAT: "Question with ___?,Option1,Option2,Option3,CORRECT_NUMBER"
+// 🔢 CORRECT_NUMBER: 1 = first option, 2 = second option, 3 = third option
+// Example: "Question 1 is ___?,Option A,Option B,Option C,2" → Option B is correct (option #2)
+
+// 📋 UNIVERSAL QUESTION TEMPLATES — REPLACE WITH YOUR OWN QUESTIONS!
+// Just edit the text between quotes. Keep the comma format!
+
+const rawQuizData = [
+  "Question 1 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
+  "Question 2 is ___?,Answer option 1,Answer option 2,Answer option 3,2",
+  "Question 3 is ___?,Answer option 1,Answer option 2,Answer option 3,3",
+  "Question 4 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
+  "Question 5 is ___?,Answer option 1,Answer option 2,Answer option 3,2",
+  "Question 6 is ___?,Answer option 1,Answer option 2,Answer option 3,3",
+  "Question 7 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
+  "Question 8 is ___?,Answer option 1,Answer option 2,Answer option 3,2",
+  "Question 9 is ___?,Answer option 1,Answer option 2,Answer option 3,3",
+  "Question 10 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
+];
+
+// ➕ ADD YOUR OWN QUESTIONS BELOW USING THE SAME FORMAT:
+// "Your question with ___?,Option 1,Option 2,Option 3,correct_number",
+
+🧩 TECHNICAL REQUIREMENTS
+- Single HTML file with embedded CSS and JavaScript (no external dependencies)
+- Vanilla JS only — no frameworks
+- CSS custom properties for all colors, spacing, and effects
+- localStorage for persisting scores and user settings
+- Semantic HTML with ARIA attributes for accessibility
+- Touch events + click events for cross-device compatibility
+- Clean, commented code with clear section headers
+
+🚀 DELIVERABLE
+A single, production-ready index.html file that:
+1. Loads instantly on mobile and desktop
+2. Works offline after first load
+3. Is easy to customize (questions, colors, glyphs via CSS/JS variables)
+4. Passes basic accessibility checks (keyboard nav, screen reader labels)
+5. Includes smooth animations that respect prefers-reduced-motion
+
+🎁 BONUS (Optional but Nice-to-Have)
+- Sound effects toggle with mute option
+- Shareable score results
+- Daily challenge mode with seeded random questions
+- Export/import settings via JSON
+
+✨ FINAL NOTE: The game should feel magical and rewarding — every correct answer should feel like casting a spell, every win like completing a quest. Make learning feel like play! 🪄🎮📚</div>
+      </article>
+
+      <!-- 🧩 Card 3: Memory Game -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🧩</span>
+          <h2 class="card-title">Memory Game</h2>
+        </div>
+        <p class="card-desc"><strong>Эмодзи-мемори с викториной!</strong><br>Найди пару карточек — ответь на вопрос. 2 игрока, темы, анимации, звёздный фон. Один файл, работает офлайн.</p>
+        <div class="tags">
+          <span class="tag">🧩 Memory</span>
+          <span class="tag">❓ Quiz Match</span>
+          <span class="tag">👥 2 Players</span>
+          <span class="tag">✨ Stars</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="prompt3">📋 Копировать</button>
+          <button class="btn out" data-download="prompt3">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="prompt3">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt3">You are an expert frontend developer. Generate a complete, single-file HTML5 game called "Emoji Memory Match". Do not ask questions. Do not add explanations. Output ONLY the raw HTML code.
+
+🔹 🎯 WHERE TO CUSTOMIZE (EDIT THESE SECTIONS ONLY):
+
+┌─ CHANGE GAME TITLE ──────────────────────────────┐
+│ In the &lt;head&gt; section, replace:                  │
+│   &lt;title&gt;Emoji Memory Match&lt;/title&gt;              │
+│   &lt;h1&gt;Emoji Memory Match&lt;/h1&gt;                    │
+│ → with your desired game name (e.g., "Travel Quiz Match") │
+└──────────────────────────────────────────────────┘
+
+┌─ ADD YOUR OWN QUIZ QUESTIONS ────────────────────┐
+│ At the TOP of &lt;script&gt;, find and EDIT this block:│
+│                                                  │
+│   // 🔹 TEACHER: EDIT QUIZ QUESTIONS BELOW ▼     │
+│   const QUIZ_QUESTIONS = [                       │
+│     { q: "Your question?", answer: "correct",    │
+│       options: ["wrong1", "correct", "wrong2"] },│
+│     // ➕ Add more questions following this format│
+│   ];                                             │
+│                                                  │
+│ Rules:                                           │
+│ • Keep "q" (question text), "answer" (exact match), │
+│   and "options" (array of 3 choices)             │
+│ • Use simple English, A1–B2 level                │
+│ • Answer must exactly match one option (case-insensitive) │
+│ • Minimum 3 questions recommended                │
+└──────────────────────────────────────────────────┘
+
+┌─ CHANGE THEME / EMOJIS (OPTIONAL) ───────────────┐
+│ Same location, edit:                             │
+│   const THEME = "Travel &amp; Adventure";            │
+│   const GAME_EMOJIS = ["✈️", "🧳", ...];         │
+│ → Pick 8 emojis that match your lesson topic     │
+└──────────────────────────────────────────────────┘
+
+
+🔹 MY INPUT (OPTIONAL — EDIT ONLY IF YOU WANT):
+THEME: "[YOUR THEME HERE]"
+QUIZ_QUESTIONS: [
+  { q: "Your question?", answer: "correct", options: ["wrong1", "correct", "wrong2"] }
+]
+
+🔹 DEFAULT FALLBACKS (USE IF INPUT IS EMPTY OR UNCHANGED):
+• THEME → "Travel &amp; Adventure"
+• QUIZ_QUESTIONS → [
+    { q: "__ this a suitcase?", answer: "Is", options: ["Is", "Are", "Am"] },
+    { q: "They __ tourists.", answer: "are", options: ["is", "are", "am"] },
+    { q: "I __ ready to go.", answer: "am", options: ["is", "are", "am"] },
+    { q: "The plane __ fast.", answer: "is", options: ["is", "are", "am"] },
+    { q: "We __ on vacation.", answer: "are", options: ["is", "are", "am"] }
+  ]
+
+🔹 YOUR AUTOMATIC TASK:
+1. EMOJIS: Auto-select exactly 8 distinct, theme-relevant Unicode emoji pairs (16 cards total). Store in `const GAME_EMOJIS = [...]` at the top of &lt;script&gt;.
+2. CARD DESIGN — CRITICAL:
+   • BACK (visible by default): Gradient background with a UNIQUE ENGLISH LETTER (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P) centered in large, bold, white font. NO question marks.
+   • FRONT (visible when flipped): Large, centered emoji (font-size: 2.5rem+), clean white background, subtle border.
+   • Smooth 3D flip animation on click. Absolutely NO &lt;img&gt; tags, NO URLs, ONLY Unicode emojis.
+3. GAME ENGINE: 2-player turn-based memory match:
+   • 4×4 responsive CSS Grid
+   • Live scoreboard + active turn highlight
+   • Quiz modal triggers on EVERY successful match (uses QUIZ_QUESTIONS or fallback)
+   • Correct → +1 point, cards stay matched, player keeps turn
+   • Wrong → 0 points, cards flip back, turn switches
+   • Buttons: 🔄 New Game, ⏭️ Pass Turn, ❓ Help
+   • Win screen: 🏆 trophy, final scores, "Play Again"
+4. TECH SPECS:
+   • Vanilla JS only. ZERO external dependencies (no CDNs, fonts, images, or libraries)
+   • Place THEME and QUIZ_QUESTIONS as clearly commented, editable constants at the very top of &lt;script&gt;
+   • Add a visible comment block: "// 🔹 TEACHER: EDIT QUIZ QUESTIONS ABOVE ▲"
+   • Shuffle quiz options randomly each display. Cycle questions if list is short
+   • Fully responsive (mobile-first), keyboard accessible (Tab/Enter/Space), ARIA live-region, Escape closes modals
+   • Include a top HTML comment: &lt;!-- 💾 Save this file as game.html and open in any browser to play --&gt;
+5. ✨ ANIMATED STARRY BACKGROUND (REQUIRED):
+   • Add a dark night-sky gradient background to &lt;body&gt;: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)
+   • Create a fixed .stars-container (z-index: -1, pointer-events: none) holding dynamically generated stars
+   • Generate ~120 small white .star elements with random:
+     - position (0–100% top/left)
+     - size (0.5–3px)
+     - animation duration (2–5s) and delay (0–5s)
+     - opacity (0.3–0.8)
+   • CSS @keyframes twinkle: animate opacity + subtle scale + soft glow box-shadow
+   • Optionally add 3–5 .shooting-star elements with linear gradient trail, animated diagonally across screen
+   • Stars must NOT interfere with gameplay (pointer-events: none, behind content via z-index)
+   • Implement star generation in vanilla JS inside a self-invoking function at end of &lt;script&gt;
+6. OUTPUT FORMAT:
+   • Return ONLY the complete, valid HTML document inside a single ```html code block.
+   • Do NOT include any conversational text, instructions, or markdown before or after the code block.
+   • The code must be ready to copy, paste into a text editor, save as `game.html`, and run immediately.
+
+Generate the game now.</div>
+      </article>
+
+      <!-- 📸 Card 4: Students Photos Vocabulary -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">📸</span>
+          <h2 class="card-title">Students Photos Vocabulary</h2>
+        </div>
+        <p class="card-desc"><strong>AI-трансформация фото в профессии.</strong><br>Преврати фото ученика в врача, пилота или повара! Идеально для изучения лексики профессий и инструментов.</p>
+        <div class="tags">
+          <span class="tag">📸 AI Photo</span>
+          <span class="tag">👨‍⚕️ Professions</span>
+          <span class="tag">🗣️ Vocabulary</span>
+          <span class="tag">✨ Visual</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="prompt4">📋 Копировать</button>
+          <button class="btn out" data-download="prompt4">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="prompt4">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt4">Transform the person in the photo into a professional [INSERT PROFESSION] wearing an authentic, realistic uniform or attire appropriate for that occupation. Keep the person's face, hair, and expression completely unchanged. The person should be holding or interacting with typical tools/equipment of the profession (e.g., stethoscope for doctor, clipboard for engineer, tray for waiter, headset for pilot). Maintain the original neutral gray studio background, soft even lighting, and photorealistic style. Ensure natural pose, correct proportions, and high-resolution detail.</div>
+      </article>
+
+      <!-- 💕 Card 5: Study Lover Meme -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">💕</span>
+          <h2 class="card-title">Study Lover Meme</h2>
+        </div>
+        <p class="card-desc"><strong>Милый мем с учеником и книгой.</strong><br>Преврати фото в уютный образ: пижама с сердечками, книга «I love [Предмет]». Идеально для мотивации и изучения школьных предметов!</p>
+        <div class="tags">
+          <span class="tag">💕 Meme</span>
+          <span class="tag">📚 Study</span>
+          <span class="tag">🛋️ Cozy</span>
+          <span class="tag">✨ Fun</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="prompt5">📋 Копировать</button>
+          <button class="btn out" data-download="prompt5">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="prompt5">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt5">Depict the person in the photo sitting in a gray armchair, wearing pink pajamas with white and red hearts pattern, holding a red book with 'I love [Subject]' text on the cover, without changing the person's face.</div>
+      </article>
+
+      <!-- 🧹 Card 6: Household Chores AI (NEW!) -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🧹</span>
+          <h2 class="card-title">Household Chores AI</h2>
+        </div>
+        <p class="card-desc">
+          <strong>Фото ученика за домашними делами.</strong><br>
+          Преврати фото в сцену с уборкой, готовкой или ремонтом! Лицо остаётся неизменным. Идеально для изучения глаголов и бытовой лексики.
+        </p>
+        <div class="tags">
+          <span class="tag">🧹 Chores</span>
+          <span class="tag">🏠 Home</span>
+          <span class="tag">🗣️ Verbs</span>
+          <span class="tag">✨ AI Photo</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="prompt6">📋 Копировать</button>
+          <button class="btn out" data-download="prompt6">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="prompt6">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt6">Create an image of the person from the original photo performing a household chore (e.g., repairing a table, setting the dining table, taking out the trash, vacuuming the carpet, ironing a tablecloth, cooking dinner, doing laundry, dusting furniture with a duster, washing dishes, mopping the floor, or cleaning windows). Keep the person's face identical to the original image with no modifications. The background, attire, and actions should clearly depict the selected chore while ensuring the face remains unchanged.</div>
+      </article>
+
+    </div>
+
+    <!-- 📚 More -->
+    <section class="more">
+      <h3 class="more-title">📚 В разработке</h3>
+      <div class="coming">
+        <div class="ic">🪄</div>
+        <p><strong>Скоро появятся:</strong></p>
+        <p>🗣️ Dialogue Builder • 🎄 Holiday Quest<br>🧩 Puzzle Grammar • ✈️ Travel Stories</p>
+        <p style="margin-top:15px;font-size:0.92rem">
+          💡 Есть идея? <a href="mailto:suri_samner@mail.ru" style="color:var(--primary);font-weight:500">Напишите!</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 📱 Footer -->
+    <footer>
+      <p>✨ для учителей • <a href="mailto:suri_samner@mail.ru">suri_samner@mail.ru</a> • <a href="tel:+79160601011">+7 916 060-10-11</a></p>
+      <p style="margin-top:12px"><a href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank">🏰 Juliya Magic Teacher</a></p>
+    </footer>
+
+  </div>
+
+  <!-- 🍞 Toast -->
+  <div id="toast">✅ Готово! ✨</div>
+
+  <script>
+    function createParticles() {
+      const c = document.getElementById('particles');
+      for (let i = 0; i < 45; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random()*100+'%';
+        p.style.setProperty('--s', 2+Math.random()*5+'px');
+        p.style.setProperty('--o', 0.4+Math.random()*0.5);
+        p.style.setProperty('--d', 8+Math.random()*12+'s');
+        p.style.animationDelay = Math.random()*6+'s';
+        c.appendChild(p);
+      }
+    }
+    function createStars() {
+      const c = document.getElementById('stars');
+      for (let i = 0; i < 75; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        s.style.left = Math.random()*100+'%';
+        s.style.top = Math.random()*100+'%';
+        s.style.setProperty('--d', 2+Math.random()*4+'s');
+        s.style.setProperty('--o', 0.5+Math.random()*0.5);
+        s.style.animationDelay = Math.random()*2+'s';
+        c.appendChild(s);
+      }
+    }
+    function createSparkle(x,y) {
+      for (let i=0; i<7; i++) {
+        const sp = document.createElement('div');
+        sp.className = 'sparkle';
+        const angle = (i/7)*Math.PI*2, dist = 15+Math.random()*20;
+        sp.style.left = (x+Math.cos(angle)*dist)+'px';
+        sp.style.top = (y+Math.sin(angle)*dist)+'px';
+        document.body.appendChild(sp);
+        setTimeout(()=>sp.remove(), 650);
+      }
+    }
+    function toast(m) {
+      const t = document.getElementById('toast');
+      t.textContent = m; t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 2200);
+    }
+    function copyPrompt(id) {
+      const txt = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(txt).then(()=>{
+        toast('✅ Скопировано! ✨');
+        document.querySelectorAll(`[data-target="${id}"]`).forEach(btn=>{
+          btn.classList.add('copied'); btn.innerHTML = '✓ Готово!';
+          setTimeout(()=>{ btn.classList.remove('copied'); btn.innerHTML = '📋 Копировать'; }, 2000);
+        });
+      }).catch(()=>toast('❌ Ошибка'));
+    }
+    function downloadPrompt(id) {
+      const txt = document.getElementById(id).textContent;
+      const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob), a = document.createElement('a');
+      a.href = url; a.download = 'Prompt.txt';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url); toast('💾 Скачивается... ✨');
+    }
+    function toggleCode(id) {
+      const el = document.getElementById(id), btn = document.querySelector(`[data-toggle="${id}"]`);
+      el.classList.toggle('show');
+      btn.innerHTML = el.classList.contains('show') ? '🙈 Скрыть ▲' : '👁️ Показать ▼';
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      createParticles(); createStars();
+      document.querySelectorAll('.btn-copy').forEach(b=>b.onclick=(e)=>{createSparkle(e.clientX,e.clientY);copyPrompt(b.dataset.target);});
+      document.querySelectorAll('[data-download]').forEach(b=>b.onclick=()=>downloadPrompt(b.dataset.download));
+      document.querySelectorAll('.toggle').forEach(b=>b.onclick=()=>toggleCode(b.dataset.toggle));
+      document.getElementById('copyAllBtn')?.addEventListener('click', (e)=>{
+        createSparkle(e.clientX,e.clientY);
+        const all = [1,2,3,4,5,6].map(i=>document.getElementById('prompt'+i)?.textContent).filter(Boolean).join('\n\n---\n\n');
+        navigator.clipboard.writeText(all).then(()=>toast('✅ Всё скопировано! ✨'));
+      });
+    });
+  </script>
+</body>
+</html>
