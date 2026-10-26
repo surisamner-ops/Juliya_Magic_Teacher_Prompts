@@ -205,6 +205,13 @@
       0%,100% { transform: scale(1) rotate(0); }
       50% { transform: scale(1.15) rotate(3deg); }
     }
+        .emoji-icon {
+      -webkit-text-fill-color: initial !important;
+      background: none !important;
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 1.1em;
+    }
     .card-title {
       font-size: 1.35rem; font-weight: 600;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
@@ -293,6 +300,22 @@
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; margin-bottom: 14px;
+    }
+        .coming-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .coming-title .emoji-icon {
+      -webkit-text-fill-color: initial !important;
+      font-size: 1.3em;
     }
     .coming {
       background: var(--card); border: 1px dashed var(--card-border);
@@ -1004,10 +1027,13 @@ const rawQuizData = [
       </article>
     </div> <!-- ⚠️ ВОТ ЗДЕСЬ ЗАКРЫВАЕТСЯ СЕТКА КАРТОЧЕК! -->
 
-    <!-- 📚 В разработке (ТЕПЕРЬ ОНА СНАРУЖИ СЕТКИ И БУДЕТ КРАСИВОЙ) -->
+     <!-- 📚 В разработке -->
     <section class="more">
-      <h3 class="more-title">📚 В разработке</h3>
       <div class="coming">
+        <h3 class="coming-title">
+          <span class="emoji-icon">📚</span>
+          В разработке
+        </h3>
         <div class="ic">✨</div>
         <p><strong>Скоро появятся:</strong></p>
         <p>🎙️ Dialogue Builder • 🎄 Holiday Quest<br>🧩 Puzzle Grammar • ✈️ Travel Stories</p>
