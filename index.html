@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Juliya's Prompts Collection</title>
+  <title>✨ Juliya's Prompts Collection</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* === 🎨 MAGIC DESIGN SYSTEM === */
@@ -69,34 +69,34 @@
       50% { opacity: 1; transform: scale(1.5); }
     }
 
-    /* 🪄 Volumetric Icons Base Style */
-    .vol-icon {
-      width: 36px; height: 36px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)) drop-shadow(0 0 8px var(--primary-glow));
-      transition: transform 0.3s var(--ease);
-      flex-shrink: 0;
+    /* 🧚 Floating Fairy */
+    .fairy {
+      position: fixed; bottom: 30px; right: 30px;
+      font-size: 2.3rem;
+      animation: fairyFloat 3.5s ease-in-out infinite, fairyGlow 2.5s ease-in-out infinite;
+      z-index: 15; cursor: default;
+      filter: drop-shadow(0 0 18px var(--primary-glow));
+      user-select: none;
     }
-    .vol-icon-large {
-      width: 48px; height: 48px;
-      filter: drop-shadow(0 6px 12px rgba(106, 176, 243, 0.4));
-      animation: iconFloat 3s ease-in-out infinite;
+    @keyframes fairyFloat {
+      0%,100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-20px) rotate(4deg); }
     }
-    @keyframes iconFloat {
-      0%,100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(3deg); }
+    @keyframes fairyGlow {
+      0%,100% { filter: drop-shadow(0 0 18px var(--primary-glow)); }
+      50% { filter: drop-shadow(0 0 30px var(--primary-glow)); }
     }
 
     /* 🌟 Floating Icons */
     .float-icon {
-      position: fixed; opacity: 0.6;
-      animation: floatIcon 6s ease-in-out infinite;
+      position: fixed; font-size: 1.6rem; opacity: 0.85;
+      animation: iconFloat 4.5s ease-in-out infinite;
       pointer-events: none; z-index: 2;
-      filter: drop-shadow(0 0 15px var(--primary-glow));
+      filter: drop-shadow(0 0 10px var(--primary-glow));
     }
-    .float-icon svg { width: 40px; height: 40px; fill: url(#vol-grad-1); }
-    @keyframes floatIcon {
+    @keyframes iconFloat {
       0%,100% { transform: translateY(0) rotate(0deg) scale(1); }
-      50% { transform: translateY(-25px) rotate(10deg) scale(1.1); }
+      50% { transform: translateY(-25px) rotate(12deg) scale(1.05); }
     }
 
     /* ✨ Floating Orbs */
@@ -122,25 +122,23 @@
       z-index: 30; backdrop-filter: blur(5px);
     }
     .icon-btn {
-      width: 46px; height: 46px; border-radius: 50%;
+      width: 42px; height: 42px; border-radius: 50%;
       border: 2px solid var(--primary);
       background: rgba(106,176,243,0.15); color: var(--primary);
-      cursor: pointer;
+      font-size: 1.2rem; cursor: pointer;
       display: grid; place-items: center;
       transition: all 0.3s var(--ease); position: relative; overflow: hidden;
     }
-    .icon-btn svg { width: 22px; height: 22px; fill: var(--primary); transition: fill 0.3s; z-index: 2; }
     .icon-btn::before {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
       opacity: 0; transition: opacity 0.25s;
     }
     .icon-btn:hover {
-      transform: scale(1.12) rotate(5deg);
-      box-shadow: 0 0 25px var(--primary-glow); border-color: transparent;
+      color: var(--bg-1); transform: scale(1.12) rotate(5deg);
+      box-shadow: 0 0 25px var(--primary-glow);
     }
     .icon-btn:hover::before { opacity: 1; }
-    .icon-btn:hover svg { fill: var(--bg-1); }
 
     /* 🎯 MAIN TITLE */
     .main-title { text-align: center; padding: 35px 15px 40px; animation: titleIn 0.8s var(--ease); }
@@ -192,8 +190,6 @@
     .card:nth-child(4) { animation-delay: 0.45s; }
     .card:nth-child(5) { animation-delay: 0.55s; }
     .card:nth-child(6) { animation-delay: 0.65s; }
-    .card:nth-child(7) { animation-delay: 0.75s; }
-    .card:nth-child(8) { animation-delay: 0.85s; }
 
     /* Card Header */
     .card-head {
@@ -202,17 +198,12 @@
       border-bottom: 1px solid var(--card-border);
     }
     .card-emoji {
-      display: flex; align-items: center; justify-content: center;
-      width: 52px; height: 52px;
-      background: rgba(106, 176, 243, 0.1);
-      border-radius: 14px;
-      border: 1px solid var(--card-border);
+      font-size: 2.2rem; animation: emojiBounce 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px var(--primary-glow));
     }
-    .card-emoji svg {
-      width: 32px; height: 32px;
-      fill: url(#vol-grad-1);
-      filter: drop-shadow(0 4px 8px rgba(106, 176, 243, 0.4));
-      animation: iconFloat 3s ease-in-out infinite;
+    @keyframes emojiBounce {
+      0%,100% { transform: scale(1) rotate(0); }
+      50% { transform: scale(1.15) rotate(3deg); }
     }
     .card-title {
       font-size: 1.35rem; font-weight: 600;
@@ -228,15 +219,12 @@
     /* Tags */
     .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
     .tag {
-      display: inline-flex; align-items: center; gap: 6px;
       background: rgba(106,176,243,0.15); border: 1px solid var(--card-border);
       border-radius: 14px; padding: 4px 11px;
       font-size: 0.8rem; font-weight: 500; color: var(--primary);
       transition: all 0.25s var(--ease);
     }
-    .tag svg { width: 14px; height: 14px; fill: var(--primary); }
     .tag:hover { background: var(--primary); color: var(--bg-1); transform: translateY(-2px); }
-    .tag:hover svg { fill: var(--bg-1); }
 
     /* Buttons */
     .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
@@ -246,11 +234,10 @@
       color: var(--bg-1); border: none; padding: 11px 15px;
       font-family: var(--font); font-size: 0.92rem; font-weight: 600;
       border-radius: 12px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
       transition: all 0.3s var(--ease); position: relative; overflow: hidden;
       box-shadow: 0 5px 20px var(--primary-glow);
     }
-    .btn svg { width: 18px; height: 18px; fill: var(--bg-1); transition: fill 0.3s; z-index: 2; }
     .btn::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(135deg, transparent, rgba(255,255,255,0.3), transparent);
@@ -259,23 +246,18 @@
     .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px var(--primary-glow); }
     .btn:hover::after { transform: translateX(100%); }
     .btn.out { background: transparent; border: 2px solid var(--primary); color: var(--primary); box-shadow: none; }
-    .btn.out svg { fill: var(--primary); }
     .btn.out:hover { background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: var(--bg-1); }
-    .btn.out:hover svg { fill: var(--bg-1); }
     .btn.copied { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
-    .btn.copied svg { fill: white; }
 
     /* Toggle */
     .toggle {
       background: none; border: none; color: var(--primary);
       font-family: var(--font); font-size: 0.9rem; font-weight: 500;
       cursor: pointer; padding: 7px 0;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
       transition: all 0.25s var(--ease); opacity: 0.9;
     }
-    .toggle svg { width: 18px; height: 18px; fill: var(--primary); transition: transform 0.3s; }
     .toggle:hover { opacity: 1; text-shadow: 0 0 12px var(--primary-glow); }
-    .toggle.active svg { transform: rotate(180deg); }
 
     /* Prompt Code Block */
     .code {
@@ -311,20 +293,14 @@
       transition: all 0.3s var(--ease);
     }
     .coming:hover { border-color: var(--primary); box-shadow: 0 0 30px var(--primary-glow); }
-    .coming .ic { 
-      display: flex; justify-content: center; margin-bottom: 14px; 
-      animation: iconFloat 3s ease-in-out infinite;
-    }
-    .coming .ic svg { width: 48px; height: 48px; fill: url(#vol-grad-1); filter: drop-shadow(0 4px 8px rgba(106, 176, 243, 0.4)); }
+    .coming .ic { font-size: 2.5rem; margin-bottom: 14px; animation: emojiBounce 2.4s ease-in-out infinite; }
 
     /* 📱 Footer */
     footer { text-align: center; padding: 30px 15px 50px; color: var(--text-dim); font-size: 0.93rem; animation: fadeIn 0.7s var(--ease) 0.5s both; }
-    footer a { color: var(--primary); text-decoration: none; transition: all 0.25s var(--ease); position: relative; display: inline-flex; align-items: center; gap: 6px; }
-    footer a svg { width: 16px; height: 16px; fill: var(--primary); transition: fill 0.25s; }
+    footer a { color: var(--primary); text-decoration: none; transition: all 0.25s var(--ease); position: relative; }
     footer a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--primary); transition: width 0.25s; }
     footer a:hover { text-shadow: 0 0 12px var(--primary-glow); }
     footer a:hover::after { width: 100%; }
-    footer a:hover svg { fill: #a8e6ff; }
 
     /* 🍞 Toast */
     #toast {
@@ -336,9 +312,7 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 25px var(--primary-glow);
       z-index: 1000; opacity: 0; pointer-events: none;
       transition: all 0.35s var(--ease);
-      display: flex; align-items: center; gap: 8px;
     }
-    #toast svg { width: 20px; height: 20px; fill: var(--bg-1); }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* ✨ Sparkle */
@@ -363,7 +337,8 @@
       .btn { min-width: 100%; }
       .btns { flex-direction: column; }
       .code { font-size: 0.84rem; max-height: 380px; }
-      .float-icon { display: none; }
+      .fairy { font-size: 1.9rem; bottom: 20px; right: 20px; }
+      .float-icon { font-size: 1.3rem; }
     }
 
     /* ♿ Accessibility */
@@ -379,92 +354,66 @@
   </style>
 </head>
 <body>
-  <!-- SVG Definitions for Volumetric Gradients -->
-  <svg width="0" height="0" style="position: absolute;">
-    <defs>
-      <linearGradient id="vol-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#6ab0f3" />
-        <stop offset="100%" stop-color="#4ecdc4" />
-      </linearGradient>
-    </defs>
-  </svg>
-
   <!-- ✨ Background -->
   <div class="particles" id="particles"></div>
   <div class="stars" id="stars"></div>
-  
-  <!-- Floating Volumetric Icons -->
-  <div class="float-icon" style="top:10%;left:5%;animation-delay:0s">
-    <svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-  </div>
-  <div class="float-icon" style="top:22%;right:7%;animation-delay:0.7s">
-    <svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-  </div>
-  <div class="float-icon" style="top:55%;left:3%;animation-delay:1.4s">
-    <svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-  </div>
+  <div class="fairy" aria-hidden="true">🧚✨</div>
+  <div class="float-icon" style="top:10%;left:5%;animation-delay:0s">🎡</div>
+  <div class="float-icon" style="top:22%;right:7%;animation-delay:0.7s">✨</div>
+  <div class="float-icon" style="top:55%;left:3%;animation-delay:1.4s">🪄</div>
+  <div class="float-icon" style="bottom:32%;right:5%;animation-delay:0.3s">🎯</div>
+  <div class="float-icon" style="top:40%;left:8%;animation-delay:1s;font-size:1.3rem">💫</div>
   <div class="orb" style="width:120px;height:120px;top:15%;right:10%;--tx:30px;--ty:-30px"></div>
   <div class="orb" style="width:80px;height:80px;bottom:25%;left:8%;--tx:-25px;--ty:25px;animation-delay:2s"></div>
 
   <!-- 🔘 Header -->
   <div class="header">
-    <button class="icon-btn" id="copyAllBtn" title="Копировать всё" aria-label="Копировать">
-      <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg>
-    </button>
-    <a class="icon-btn" href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank" title="Сайт" aria-label="Главный сайт">
-      <svg viewBox="0 0 24 24"><path d="M12 3L2 12H5V20H19V12H22L12 3ZM12 8.5L17 13H15V18H9V13H7L12 8.5Z"/></svg>
-    </a>
+    <button class="icon-btn" id="copyAllBtn" title="Копировать всё" aria-label="Копировать">📋</button>
+    <a class="icon-btn" href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank" title="Сайт" aria-label="Главный сайт">🏰</a>
   </div>
 
   <div class="container">
+    
     <!-- 🎯 Title -->
     <header class="main-title">
-      <h1 class="title-big">Juliya's Prompts Collection</h1>
+      <h1 class="title-big">✨ Juliya's Prompts Collection</h1>
       <p class="title-sub">Волшебные промпты для создания интерактивных игр • Копируй • Вставляй • Твори магию</p>
     </header>
 
     <!-- 🗂️ Cards Grid -->
     <div class="cards-grid">
       
-      <!-- Card 1: Spin & Learn -->
+      <!-- 🎡 Card 1: Spin & Learn -->
       <article class="card">
         <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 6C11.45 6 11 6.45 11 7V12.41L8.71 10.12C8.32 9.73 7.69 9.73 7.3 10.12C6.91 10.51 6.91 11.14 7.3 11.53L11.29 15.53C11.68 15.92 12.31 15.92 12.7 15.53L16.69 11.53C17.08 11.14 17.08 10.51 16.69 10.12C16.3 9.73 15.67 9.73 15.28 10.12L13 12.41V7C13 6.45 12.55 6 12 6Z"/></svg>
-          </div>
+          <span class="card-emoji">🎡</span>
           <h2 class="card-title">Spin & Learn</h2>
         </div>
         <p class="card-desc"><strong>Интерактивное колесо вопросов.</strong><br>Ученики крутят колесо и отвечают на вопросы. Один HTML-файл, работает офлайн.</p>
         <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 6C11.45 6 11 6.45 11 7V12.41L8.71 10.12C8.32 9.73 7.69 9.73 7.3 10.12C6.91 10.51 6.91 11.14 7.3 11.53L11.29 15.53C11.68 15.92 12.31 15.92 12.7 15.53L16.69 11.53C17.08 11.14 17.08 10.51 16.69 10.12C16.3 9.73 15.67 9.73 15.28 10.12L13 12.41V7C13 6.45 12.55 6 12 6Z"/></svg> Wheel</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14ZM20 6H17V4H20C21.1 4 22 4.9 22 6V9H20V6ZM4 6H7V4H4C2.9 4 2 4.9 2 6V9H4V6Z"/></svg> Teacher</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M20 6H12L10 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6ZM20 18H4V6H9.17L11.17 8H20V18Z"/></svg> Single HTML</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15 8H9V6C9 4.34 10.34 3 12 3C13.66 3 15 4.34 15 6V8Z"/></svg> Offline</span>
+          <span class="tag">🎯 Wheel</span>
+          <span class="tag">👨‍🏫 Teacher</span>
+          <span class="tag">📦 Single HTML</span>
+          <span class="tag">🔌 Offline</span>
         </div>
         <div class="btns">
-          <button class="btn btn-copy" data-target="prompt1">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать
-          </button>
-          <button class="btn out" data-download="prompt1">
-            <svg viewBox="0 0 24 24"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z"/></svg> .txt
-          </button>
+          <button class="btn btn-copy" data-target="prompt1">📋 Копировать</button>
+          <button class="btn out" data-download="prompt1">💾 .txt</button>
         </div>
-        <button class="toggle" data-toggle="prompt1">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/></svg> Показать промпт
-        </button>
+        <button class="toggle" data-toggle="prompt1">👁️ Показать промпт ▼</button>
         <div class="code" id="prompt1">Create an interactive browser-based educational wheel game called "[GAME_TITLE]" for language learning or classroom activities. The game must be fully self-contained (single HTML file with embedded CSS and JS).
 
-🎨 TEACHER CUSTOMIZATION PANEL — EDIT ONLY THIS SECTION:
+🎨 TEACHER CUSTOMIZATION PANEL — EDIT(РЕДАКТИРОВАТЬ) ONLY THIS SECTION:
 ================================================================
-[GAME_TITLE] = "Career Quest Wheel"
-[GAME_SUBTITLE] = "Spin the wheel! Answer & learn!"
-[THEME_COLORS] = {
-  primary: "#ffd700",
-  background: ["#1a1a2e", "#16213e", "#0f0c29"],
+[GAME_TITLE] = "Career Quest Wheel"                    // ← Change game name
+[GAME_SUBTITLE] = "Spin the wheel! Answer & learn! ✨" // ← Short description
+[THEME_COLORS] = {                                     // ← Optional: change colors
+  primary: "#ffd700",      // golden accent
+  background: ["#1a1a2e", "#16213e", "#0f0c29"], // gradient
   segments: ["#9b59b6", "#3498db", "#2ecc71", "#e67e22", "#1abc9c", "#f1c40f", "#e91e63"]
 }
-[SEGMENT_COUNT] = 7
-[QUESTIONS] = [
+[SEGMENT_COUNT] = 7                                    // ← Number of questions (5-12 recommended)
+[QUESTIONS] = [                                        // ← EDIT YOUR QUESTIONS HERE
   " QUESTION 1",
   " QUESTION 2",
   " QUESTION 3",
@@ -473,340 +422,409 @@
   " QUESTION 6",
   " QUESTION 7"
 ]
-[RESULT_BOX_LABEL] = "Your question appears here..."
-[COMPLETION_MESSAGE] = "Amazing! You've answered all questions!"
-[AUDIO_ENABLED] = true
-[FONT_FAMILY] = "'Fredoka', sans-serif"
+[RESULT_BOX_LABEL] = "Your question appears here... 🪄" // ← Placeholder text
+[COMPLETION_MESSAGE] = "🎉 Amazing! You've answered all questions!" // ← End game text
+[AUDIO_ENABLED] = true                                 // ← Set false to disable sound
+[FONT_FAMILY] = "'Fredoka', sans-serif"                // ← Change font if needed
 ================================================================
 
-🎨 DESIGN & ATMOSPHERE:
+🎨 DESIGN & ATMOSPHERE (auto-generated from panel above):
 - Background: gradient from [THEME_COLORS.background]
 - Accent color: [THEME_COLORS.primary] with glow effects
 - Font: [FONT_FAMILY]
 - Animated twinkling stars background (80+ elements)
-- Control buttons: mute toggle + home button (top-right)
+- Optional magical element: animated fairy 🧚✨ or theme-appropriate icon
+- Control buttons: 🔇 mute toggle + 🏰 home button (top-right)
 - All interactive elements with smooth hover animations
 
-🎡 THE WHEEL:
+🎡 THE WHEEL (auto-calculated):
 - Circular wheel, 500px diameter (responsive for mobile)
-- [SEGMENT_COUNT] colored segments using conic-gradient
+- [SEGMENT_COUNT] colored segments using conic-gradient from [THEME_COLORS.segments]
 - Golden pointer marker at top with pulsing animation
+- Center hub: 🎯 or theme-appropriate emoji
 - Each segment displays one question from [QUESTIONS] array
+- Question text boxes: auto-positioned along radius, auto-rotated for readability
 
 🔄 GAME LOGIC:
 1. On load: all [SEGMENT_COUNT] questions available
-2. Button "[GAME_TITLE] — SPIN!" triggers rotation (5-8 full spins + random offset)
-3. After wheel stops: Selected question appears in SEPARATE FIELD below wheel
-4. Button changes to "Answered! Next"
-5. On second click: Question marked as used, button resets
-6. When all questions completed: Show modal "[COMPLETION_MESSAGE]"
+2. Button "[GAME_TITLE] — SPIN!" triggers rotation:
+   - 5-8 full spins + random offset
+   - Smooth deceleration (cubic-bezier easing)
+   - Optional "tick" sounds during spin (if [AUDIO_ENABLED] = true)
+3. After wheel stops:
+   - Wheel auto-aligns to nearest segment center
+   - ✅ KEY: Selected question appears in SEPARATE FIELD below wheel (result-box)
+   - Selected segment on wheel gets highlight glow
+   - Optional magic sound plays
+4. Button changes to "✅ Answered! Next ➜"
+5. On second click:
+   - Question marked as used (fades from wheel, progress dot updates)
+   - Optional confetti animation 🎉
+   - Button resets for next spin
+6. When all questions completed:
+   - Show modal: "[COMPLETION_MESSAGE]"
+   - "🔄 Start New Game" button resets everything
+
+🔊 AUDIO SYSTEM (if [AUDIO_ENABLED] = true):
+- Use Web Audio API only — NO external files
+- playClick(): short tone for wheel ticks
+- playMagicChime(): pleasant chord when question selected
+- playFanfare(): celebration sound when question answered
+- 🔇/🔊 toggle button included
+- AudioContext initialized on first user click (browser compliance)
+
+📊 PROGRESS & UI:
+- Progress indicator: "Questions left: [dots] X/[SEGMENT_COUNT]"
+- Dot states: gold (available) → gray (used) → glowing (active)
+- Result display field (result-box):
+  * Shows label: "[RESULT_BOX_LABEL]" when empty
+  * Displays selected question with fade-in + slide-up animation
+  * Golden border glow when active
+  * Clears after "✅ Answered!" clicked
+- Fully responsive: scales for <600px and <420px screens
+
+🎯 CRITICAL REQUIREMENT:
+After spin, the selected question MUST appear in a dedicated, visually distinct field (result-box) below the wheel — this is the main reading area for students. It must:
+- Have smooth entrance animation
+- Feature accent-color border when active
+- Clear after user confirms answer
+- Be empty state labeled with [RESULT_BOX_LABEL]
 
 📦 TECHNICAL SPECIFICATIONS:
-- Single HTML file, zero external dependencies
+- Single HTML file, zero external dependencies (except Google Fonts if used)
 - Vanilla JavaScript, no frameworks
 - CSS animations via @keyframes
+- Confetti: 60 particles with randomized properties (if enabled)
 - Keyboard support: Space/Enter for spin/answer
+- State management: isSpinning, gameState, availableQuestions/usedQuestions arrays
 
-Generate complete, production-ready code. At the TOP of the JavaScript section, create a clearly marked "TEACHER SETTINGS" object.</div>
+✨ POLISH & ACCESSIBILITY:
+- Button shine effect on hover
+- Subtle pulse animations to guide attention
+- Used questions fade smoothly from wheel
+- High contrast text for readability
+- ARIA labels for buttons (accessibility)
+- Overall magical/friendly aesthetic — feels like play, not a test
+
+Generate complete, production-ready code. At the TOP of the JavaScript section, create a clearly marked "🎓 TEACHER SETTINGS" object that mirrors the Customization Panel above, so teachers can edit questions/settings without touching game logic. Add comments like "// ✏️ EDIT QUESTIONS BELOW" for easy navigation.</div>
       </article>
 
-      <!-- Card 2: Tic Tac Toe -->
+      <!-- ⭕ Card 2: Tic Tac Toe -->
       <article class="card">
         <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V4C22 2.9 21.1 2 20 2ZM20 20H4V4H20V20ZM8 6H10V10H14V6H16V10H20V12H16V16H20V18H16V22H14V18H10V22H8V18H4V16H8V12H4V10H8V6Z"/></svg>
-          </div>
+          <span class="card-emoji">⭕</span>
           <h2 class="card-title">Tic Tac Toe</h2>
         </div>
-        <p class="card-desc"><strong>Крестики-нолики с викториной!</strong><br>Ответь на вопрос — сделай ход. Магическая тема, настройки, ИИ, сохранение счёта.</p>
+        <p class="card-desc"><strong>Крестики-нолики с викториной!</strong><br>Ответь на вопрос — сделай ход. Магическая тема, настройки, ИИ, сохранение счёта. Один файл, работает офлайн.</p>
         <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V4C22 2.9 21.1 2 20 2ZM20 20H4V4H20V20ZM8 6H10V10H14V6H16V10H20V12H16V16H20V18H16V22H14V18H10V22H8V18H4V16H8V12H4V10H8V6Z"/></svg> Tic Tac Toe</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/></svg> Quiz Gate</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 6C11.45 6 11 6.45 11 7V12.41L8.71 10.12C8.32 9.73 7.69 9.73 7.3 10.12C6.91 10.51 6.91 11.14 7.3 11.53L11.29 15.53C11.68 15.92 12.31 15.92 12.7 15.53L16.69 11.53C17.08 11.14 17.08 10.51 16.69 10.12C16.3 9.73 15.67 9.73 15.28 10.12L13 12.41V7C13 6.45 12.55 6 12 6Z"/></svg> Vs AI</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15 8H9V6C9 4.34 10.34 3 12 3C13.66 3 15 4.34 15 6V8Z"/></svg> Offline</span>
+          <span class="tag">⭕ Tic Tac Toe</span>
+          <span class="tag">❓ Quiz Gate</span>
+          <span class="tag">🤖 Vs AI</span>
+          <span class="tag">🔐 Offline</span>
         </div>
         <div class="btns">
-          <button class="btn btn-copy" data-target="prompt2">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать
-          </button>
-          <button class="btn out" data-download="prompt2">
-            <svg viewBox="0 0 24 24"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z"/></svg> .txt
-          </button>
+          <button class="btn btn-copy" data-target="prompt2">📋 Копировать</button>
+          <button class="btn out" data-download="prompt2">💾 .txt</button>
         </div>
-        <button class="toggle" data-toggle="prompt2">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/></svg> Показать промпт
-        </button>
+        <button class="toggle" data-toggle="prompt2">👁️ Показать промпт ▼</button>
         <div class="code" id="prompt2">Create a responsive, mobile-first web game with the following specifications:
 
 🎮 GAME CONCEPT
-A Tic-Tac-Toe style web game where players must answer a quiz question before making each move. Theme: "Magic Quest".
+A Tic-Tac-Toe style web game where players must answer a quiz question before making each move. Theme: "Magic Quest" — mystical, educational, fun, and fully customizable.
 
 🎨 DESIGN REQUIREMENTS
-- Modern glassmorphism UI with CSS custom properties
+- Modern glassmorphism UI with CSS custom properties (variables) for easy theming
 - Animated background: twinkling stars + subtle gradient shift
-- Fully responsive: mobile-first, works from 320px width
-- Accessible: keyboard navigation, ARIA labels, focus rings
+- Smooth animations: hover lifts, pop-in glyphs, victory confetti
+- Fully responsive: mobile-first, works from 320px width, touch-friendly
+- Accessible: keyboard navigation, ARIA labels, focus rings, prefers-reduced-motion support
+- Color palette (CSS variables):
+  --bg-deep: #0f0c29;
+  --bg-mid: #302b63;
+  --accent-primary: #ff6b9d;
+  --accent-secondary: #7b68ee;
+  --accent-gold: #ffd93d;
+  --success: #00d9a5;
+  --error: #ff6b6b;
 
 ⚙️ CORE FEATURES
-1. Game Board: 3x3 grid, players alternate placing X/O
-2. Quiz Gate: Before each move, a modal quiz appears
-3. Settings Panel: Toggle quiz, choose glyph theme, Game mode (2 Players / Vs AI), AI difficulty
+1. Game Board: 3x3 grid, players alternate placing X/O (or themed glyphs)
+2. Quiz Gate: Before each move, a modal quiz appears — player must answer to proceed
+3. Settings Panel (modal dialog):
+   - Toggle quiz on/off
+   - Choose glyph theme: Standard (X/O) / Magic (✨/🌙) / Knight (⚔/🛡)
+   - Game mode: 2 Players / Vs AI
+   - AI difficulty: Perfect / Pragmatic / Reckless (if vs AI)
+   - Choose who starts: Player 1 / Player 2
 4. Score Tracking: Display wins for P1, P2, and draws; persist in localStorage
-5. Feedback System: Correct (green + confetti), Incorrect (red + show correct answer, up to 3 attempts)
+5. Feedback System: 
+   - Correct answer: green highlight + positive message + mini confetti
+   - Incorrect answer: red highlight + encouraging message + show correct answer
+   - Allow up to 3 attempts per question, then auto-proceed (mercy rule)
+6. Victory Effects: Full-screen confetti + animated banner with winner message
 
-❓ QUESTION SYSTEM
+❓ QUESTION SYSTEM — ✏️ UNIVERSAL TEMPLATE (JUST ADD YOUR QUESTIONS) ✏️
+
 Questions must be stored in a simple, editable JavaScript array. Use this EXACT structure:
 
+// 🎯🎯🎯 HOW TO SPECIFY THE CORRECT ANSWER 🎯🎯🎯
+// FORMAT: "Question with ___?,Option1,Option2,Option3,CORRECT_NUMBER"
+// 🔢 CORRECT_NUMBER: 1 = first option, 2 = second option, 3 = third option
+// Example: "Question 1 is ___?,Option A,Option B,Option C,2" → Option B is correct (option #2)
+
+// 📋 UNIVERSAL QUESTION TEMPLATES — REPLACE WITH YOUR OWN QUESTIONS!
+// Just edit the text between quotes. Keep the comma format!
+
 const rawQuizData = [
-  "Question 1 is ___,Answer option 1,Answer option 2,Answer option 3,1",
-  "Question 2 is ___,Answer option 1,Answer option 2,Answer option 3,2",
-  "Question 3 is ___,Answer option 1,Answer option 2,Answer option 3,3"
+  "Question 1 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
+  "Question 2 is ___?,Answer option 1,Answer option 2,Answer option 3,2",
+  "Question 3 is ___?,Answer option 1,Answer option 2,Answer option 3,3",
+  "Question 4 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
+  "Question 5 is ___?,Answer option 1,Answer option 2,Answer option 3,2",
+  "Question 6 is ___?,Answer option 1,Answer option 2,Answer option 3,3",
+  "Question 7 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
+  "Question 8 is ___?,Answer option 1,Answer option 2,Answer option 3,2",
+  "Question 9 is ___?,Answer option 1,Answer option 2,Answer option 3,3",
+  "Question 10 is ___?,Answer option 1,Answer option 2,Answer option 3,1",
 ];
 
+// ➕ ADD YOUR OWN QUESTIONS BELOW USING THE SAME FORMAT:
+// "Your question with ___?,Option 1,Option 2,Option 3,correct_number",
+
 🧩 TECHNICAL REQUIREMENTS
-- Single HTML file with embedded CSS and JavaScript
+- Single HTML file with embedded CSS and JavaScript (no external dependencies)
 - Vanilla JS only — no frameworks
+- CSS custom properties for all colors, spacing, and effects
+- localStorage for persisting scores and user settings
+- Semantic HTML with ARIA attributes for accessibility
+- Touch events + click events for cross-device compatibility
 - Clean, commented code with clear section headers
 
 🚀 DELIVERABLE
-A single, production-ready index.html file that loads instantly, works offline, and is easy to customize.</div>
+A single, production-ready index.html file that:
+1. Loads instantly on mobile and desktop
+2. Works offline after first load
+3. Is easy to customize (questions, colors, glyphs via CSS/JS variables)
+4. Passes basic accessibility checks (keyboard nav, screen reader labels)
+5. Includes smooth animations that respect prefers-reduced-motion
+
+🎁 BONUS (Optional but Nice-to-Have)
+- Sound effects toggle with mute option
+- Shareable score results
+- Daily challenge mode with seeded random questions
+- Export/import settings via JSON
+
+✨ FINAL NOTE: The game should feel magical and rewarding — every correct answer should feel like casting a spell, every win like completing a quest. Make learning feel like play! 🪄🎮📚</div>
       </article>
 
-      <!-- Card 3: Memory Game -->
+      <!-- 🧩 Card 3: Memory Game -->
       <article class="card">
         <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V6H20V18ZM12 8C10.9 8 10 8.9 10 10C10 11.1 10.9 12 12 12C13.1 12 14 11.1 14 10C14 8.9 13.1 8 12 8ZM12 14C9.33 14 4 15.34 4 18V18H20V18C20 15.34 14.67 14 12 14Z"/></svg>
-          </div>
+          <span class="card-emoji">🧩</span>
           <h2 class="card-title">Memory Game</h2>
         </div>
-        <p class="card-desc"><strong>Эмодзи-мемори с викториной!</strong><br>Найди пару карточек — ответь на вопрос. 2 игрока, темы, анимации, звёздный фон.</p>
+        <p class="card-desc"><strong>Эмодзи-мемори с викториной!</strong><br>Найди пару карточек — ответь на вопрос. 2 игрока, темы, анимации, звёздный фон. Один файл, работает офлайн.</p>
         <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V6H20V18ZM12 8C10.9 8 10 8.9 10 10C10 11.1 10.9 12 12 12C13.1 12 14 11.1 14 10C14 8.9 13.1 8 12 8ZM12 14C9.33 14 4 15.34 4 18V18H20V18C20 15.34 14.67 14 12 14Z"/></svg> Memory</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/></svg> Quiz Match</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M16 11C17.66 11 18.99 9.66 18.99 8C18.99 6.34 17.66 5 16 5C14.34 5 13 6.34 13 8C13 9.66 14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8C10.99 6.34 9.66 5 8 5C6.34 5 5 6.34 5 8C5 9.66 6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z"/></svg> 2 Players</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg> Stars</span>
+          <span class="tag">🧩 Memory</span>
+          <span class="tag">❓ Quiz Match</span>
+          <span class="tag">👥 2 Players</span>
+          <span class="tag">✨ Stars</span>
         </div>
         <div class="btns">
-          <button class="btn btn-copy" data-target="prompt3">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать
-          </button>
-          <button class="btn out" data-download="prompt3">
-            <svg viewBox="0 0 24 24"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z"/></svg> .txt
-          </button>
+          <button class="btn btn-copy" data-target="prompt3">📋 Копировать</button>
+          <button class="btn out" data-download="prompt3">💾 .txt</button>
         </div>
-        <button class="toggle" data-toggle="prompt3">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/></svg> Показать промпт
-        </button>
-        <div class="code" id="prompt3">You are an expert frontend developer. Generate a complete, single-file HTML5 game called "Emoji Memory Match". Output ONLY the raw HTML code.
+        <button class="toggle" data-toggle="prompt3">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt3">You are an expert frontend developer. Generate a complete, single-file HTML5 game called "Emoji Memory Match". Do not ask questions. Do not add explanations. Output ONLY the raw HTML code.
 
-🔹 WHERE TO CUSTOMIZE:
-1. CHANGE GAME TITLE: Replace <title> and <h1> with your desired game name.
-2. ADD YOUR OWN QUIZ QUESTIONS: Edit the QUIZ_QUESTIONS array at the top of <script>.
-   Rules: Keep "q" (question text), "answer" (exact match), and "options" (array of 3 choices).
-3. CHANGE THEME / EMOJIS: Edit THEME and GAME_EMOJIS arrays.
+🔹 🎯 WHERE TO CUSTOMIZE (EDIT THESE SECTIONS ONLY):
+
+┌─ CHANGE GAME TITLE ──────────────────────────────┐
+│ In the &lt;head&gt; section, replace:                  │
+│   &lt;title&gt;Emoji Memory Match&lt;/title&gt;              │
+│   &lt;h1&gt;Emoji Memory Match&lt;/h1&gt;                    │
+│ → with your desired game name (e.g., "Travel Quiz Match") │
+└──────────────────────────────────────────────────┘
+
+┌─ ADD YOUR OWN QUIZ QUESTIONS ────────────────────┐
+│ At the TOP of &lt;script&gt;, find and EDIT this block:│
+│                                                  │
+│   // 🔹 TEACHER: EDIT QUIZ QUESTIONS BELOW ▼     │
+│   const QUIZ_QUESTIONS = [                       │
+│     { q: "Your question?", answer: "correct",    │
+│       options: ["wrong1", "correct", "wrong2"] },│
+│     // ➕ Add more questions following this format│
+│   ];                                             │
+│                                                  │
+│ Rules:                                           │
+│ • Keep "q" (question text), "answer" (exact match), │
+│   and "options" (array of 3 choices)             │
+│ • Use simple English, A1–B2 level                │
+│ • Answer must exactly match one option (case-insensitive) │
+│ • Minimum 3 questions recommended                │
+└──────────────────────────────────────────────────┘
+
+┌─ CHANGE THEME / EMOJIS (OPTIONAL) ───────────────┐
+│ Same location, edit:                             │
+│   const THEME = "Travel &amp; Adventure";            │
+│   const GAME_EMOJIS = ["✈️", "🧳", ...];         │
+│ → Pick 8 emojis that match your lesson topic     │
+└──────────────────────────────────────────────────┘
+
+
+🔹 MY INPUT (OPTIONAL — EDIT ONLY IF YOU WANT):
+THEME: "[YOUR THEME HERE]"
+QUIZ_QUESTIONS: [
+  { q: "Your question?", answer: "correct", options: ["wrong1", "correct", "wrong2"] }
+]
+
+🔹 DEFAULT FALLBACKS (USE IF INPUT IS EMPTY OR UNCHANGED):
+• THEME → "Travel &amp; Adventure"
+• QUIZ_QUESTIONS → [
+    { q: "__ this a suitcase?", answer: "Is", options: ["Is", "Are", "Am"] },
+    { q: "They __ tourists.", answer: "are", options: ["is", "are", "am"] },
+    { q: "I __ ready to go.", answer: "am", options: ["is", "are", "am"] },
+    { q: "The plane __ fast.", answer: "is", options: ["is", "are", "am"] },
+    { q: "We __ on vacation.", answer: "are", options: ["is", "are", "am"] }
+  ]
 
 🔹 YOUR AUTOMATIC TASK:
-1. EMOJIS: Auto-select exactly 8 distinct, theme-relevant Unicode emoji pairs (16 cards total).
-2. CARD DESIGN: 
-   • BACK: Gradient background with a UNIQUE ENGLISH LETTER (A-P) centered.
-   • FRONT: Large, centered emoji, clean white background.
-   • Smooth 3D flip animation on click.
-3. GAME ENGINE: 2-player turn-based memory match (4x4 CSS Grid).
-   • Quiz modal triggers on EVERY successful match.
-   • Correct → +1 point, cards stay matched, player keeps turn.
-   • Wrong → 0 points, cards flip back, turn switches.
-4. TECH SPECS: Vanilla JS only. ZERO external dependencies. Fully responsive.
-5. ANIMATED STARRY BACKGROUND: Add dark night-sky gradient and ~120 small white .star elements with random positions, sizes, and twinkle animations.
+1. EMOJIS: Auto-select exactly 8 distinct, theme-relevant Unicode emoji pairs (16 cards total). Store in `const GAME_EMOJIS = [...]` at the top of &lt;script&gt;.
+2. CARD DESIGN — CRITICAL:
+   • BACK (visible by default): Gradient background with a UNIQUE ENGLISH LETTER (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P) centered in large, bold, white font. NO question marks.
+   • FRONT (visible when flipped): Large, centered emoji (font-size: 2.5rem+), clean white background, subtle border.
+   • Smooth 3D flip animation on click. Absolutely NO &lt;img&gt; tags, NO URLs, ONLY Unicode emojis.
+3. GAME ENGINE: 2-player turn-based memory match:
+   • 4×4 responsive CSS Grid
+   • Live scoreboard + active turn highlight
+   • Quiz modal triggers on EVERY successful match (uses QUIZ_QUESTIONS or fallback)
+   • Correct → +1 point, cards stay matched, player keeps turn
+   • Wrong → 0 points, cards flip back, turn switches
+   • Buttons: 🔄 New Game, ⏭️ Pass Turn, ❓ Help
+   • Win screen: 🏆 trophy, final scores, "Play Again"
+4. TECH SPECS:
+   • Vanilla JS only. ZERO external dependencies (no CDNs, fonts, images, or libraries)
+   • Place THEME and QUIZ_QUESTIONS as clearly commented, editable constants at the very top of &lt;script&gt;
+   • Add a visible comment block: "// 🔹 TEACHER: EDIT QUIZ QUESTIONS ABOVE ▲"
+   • Shuffle quiz options randomly each display. Cycle questions if list is short
+   • Fully responsive (mobile-first), keyboard accessible (Tab/Enter/Space), ARIA live-region, Escape closes modals
+   • Include a top HTML comment: &lt;!-- 💾 Save this file as game.html and open in any browser to play --&gt;
+5. ✨ ANIMATED STARRY BACKGROUND (REQUIRED):
+   • Add a dark night-sky gradient background to &lt;body&gt;: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)
+   • Create a fixed .stars-container (z-index: -1, pointer-events: none) holding dynamically generated stars
+   • Generate ~120 small white .star elements with random:
+     - position (0–100% top/left)
+     - size (0.5–3px)
+     - animation duration (2–5s) and delay (0–5s)
+     - opacity (0.3–0.8)
+   • CSS @keyframes twinkle: animate opacity + subtle scale + soft glow box-shadow
+   • Optionally add 3–5 .shooting-star elements with linear gradient trail, animated diagonally across screen
+   • Stars must NOT interfere with gameplay (pointer-events: none, behind content via z-index)
+   • Implement star generation in vanilla JS inside a self-invoking function at end of &lt;script&gt;
+6. OUTPUT FORMAT:
+   • Return ONLY the complete, valid HTML document inside a single ```html code block.
+   • Do NOT include any conversational text, instructions, or markdown before or after the code block.
+   • The code must be ready to copy, paste into a text editor, save as `game.html`, and run immediately.
 
 Generate the game now.</div>
       </article>
 
-      <!-- Card 4: Students Photos Vocabulary -->
+      <!-- 📸 Card 4: Students Photos Vocabulary -->
       <article class="card">
         <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14ZM20 6H17V4H20C21.1 4 22 4.9 22 6V9H20V6ZM4 6H7V4H4C2.9 4 2 4.9 2 6V9H4V6Z"/></svg>
-          </div>
+          <span class="card-emoji">📸</span>
           <h2 class="card-title">Students Photos Vocabulary</h2>
         </div>
-        <p class="card-desc"><strong>AI-трансформация фото в профессии.</strong><br>Преврати фото ученика в врача, пилота или повара! Идеально для изучения лексики.</p>
+        <p class="card-desc"><strong>AI-трансформация фото в профессии.</strong><br>Преврати фото ученика в врача, пилота или повара! Идеально для изучения лексики профессий и инструментов.</p>
         <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14ZM20 6H17V4H20C21.1 4 22 4.9 22 6V9H20V6ZM4 6H7V4H4C2.9 4 2 4.9 2 6V9H4V6Z"/></svg> AI Photo</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14ZM20 6H17V4H20C21.1 4 22 4.9 22 6V9H20V6ZM4 6H7V4H4C2.9 4 2 4.9 2 6V9H4V6Z"/></svg> Professions</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/></svg> Vocabulary</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg> Visual</span>
+          <span class="tag">📸 AI Photo</span>
+          <span class="tag">👨‍⚕️ Professions</span>
+          <span class="tag">🗣️ Vocabulary</span>
+          <span class="tag">✨ Visual</span>
         </div>
         <div class="btns">
-          <button class="btn btn-copy" data-target="prompt4">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать
-          </button>
-          <button class="btn out" data-download="prompt4">
-            <svg viewBox="0 0 24 24"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z"/></svg> .txt
-          </button>
+          <button class="btn btn-copy" data-target="prompt4">📋 Копировать</button>
+          <button class="btn out" data-download="prompt4">💾 .txt</button>
         </div>
-        <button class="toggle" data-toggle="prompt4">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/></svg> Показать промпт
-        </button>
-        <div class="code" id="prompt4">Transform the person in the photo into a professional [INSERT PROFESSION] wearing an authentic, realistic uniform or attire appropriate for that occupation. Keep the person's face, hair, and expression completely unchanged. The person should be holding or interacting with typical tools/equipment of the profession. Maintain the original neutral gray studio background, soft even lighting, and photorealistic style.</div>
+        <button class="toggle" data-toggle="prompt4">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt4">Transform the person in the photo into a professional [INSERT PROFESSION] wearing an authentic, realistic uniform or attire appropriate for that occupation. Keep the person's face, hair, and expression completely unchanged. The person should be holding or interacting with typical tools/equipment of the profession (e.g., stethoscope for doctor, clipboard for engineer, tray for waiter, headset for pilot). Maintain the original neutral gray studio background, soft even lighting, and photorealistic style. Ensure natural pose, correct proportions, and high-resolution detail.</div>
       </article>
 
-      <!-- Card 5: Study Lover Meme -->
+      <!-- 💕 Card 5: Study Lover Meme -->
       <article class="card">
         <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5C22 12.27 18.6 15.36 13.45 20.03L12 21.35Z"/></svg>
-          </div>
+          <span class="card-emoji">💕</span>
           <h2 class="card-title">Study Lover Meme</h2>
         </div>
-        <p class="card-desc"><strong>Милый мем с учеником и книгой.</strong><br>Преврати фото в уютный образ: пижама с сердечками, книга «I love [Предмет]».</p>
+        <p class="card-desc"><strong>Милый мем с учеником и книгой.</strong><br>Преврати фото в уютный образ: пижама с сердечками, книга «I love [Предмет]». Идеально для мотивации и изучения школьных предметов!</p>
         <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5C22 12.27 18.6 15.36 13.45 20.03L12 21.35Z"/></svg> Meme</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM18 20H6V4H18V20ZM8 6H16V8H8V6ZM8 10H16V12H8V10ZM8 14H13V16H8V14Z"/></svg> Study</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V4C22 2.9 21.1 2 20 2ZM20 20H4V4H20V20ZM12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"/></svg> Cozy</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg> Fun</span>
+          <span class="tag">💕 Meme</span>
+          <span class="tag">📚 Study</span>
+          <span class="tag">🛋️ Cozy</span>
+          <span class="tag">✨ Fun</span>
         </div>
         <div class="btns">
-          <button class="btn btn-copy" data-target="prompt5">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать
-          </button>
-          <button class="btn out" data-download="prompt5">
-            <svg viewBox="0 0 24 24"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z"/></svg> .txt
-          </button>
+          <button class="btn btn-copy" data-target="prompt5">📋 Копировать</button>
+          <button class="btn out" data-download="prompt5">💾 .txt</button>
         </div>
-        <button class="toggle" data-toggle="prompt5">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/></svg> Показать промпт
-        </button>
+        <button class="toggle" data-toggle="prompt5">👁️ Показать промпт ▼</button>
         <div class="code" id="prompt5">Depict the person in the photo sitting in a gray armchair, wearing pink pajamas with white and red hearts pattern, holding a red book with 'I love [Subject]' text on the cover, without changing the person's face.</div>
       </article>
 
-      <!-- Card 6: Household Chores AI -->
+      <!-- 🧹 Card 6: Household Chores AI (NEW!) -->
       <article class="card">
         <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M10 20V18H4V10H2V20C2 21.1 2.9 22 4 22H10C10.55 22 11 21.55 11 21V20H10ZM21.18 8.72C21.46 8.44 21.46 7.99 21.18 7.71L16.29 2.82C16.01 2.54 15.56 2.54 15.28 2.82L14.17 3.93L13.46 3.22C13.18 2.94 12.73 2.94 12.45 3.22L3.22 12.45C2.94 12.73 2.94 13.18 3.22 13.46L3.93 14.17L2.82 15.28C2.54 15.56 2.54 16.01 2.82 16.29L7.71 21.18C7.99 21.46 8.44 21.46 8.72 21.18L19.18 10.72C19.46 10.44 19.46 9.99 19.18 9.71L18.47 9L19.58 7.89L21.18 8.72V8.72ZM10.29 13.71L15.29 8.71L16.71 10.12L11.71 15.12L10.29 13.71Z"/></svg>
-          </div>
+          <span class="card-emoji">🧹</span>
           <h2 class="card-title">Household Chores AI</h2>
         </div>
-        <p class="card-desc"><strong>Фото ученика за домашними делами.</strong><br>Преврати фото в сцену с уборкой, готовкой или ремонтом! Лицо остаётся неизменным.</p>
+        <p class="card-desc">
+          <strong>Фото ученика за домашними делами.</strong><br>
+          Преврати фото в сцену с уборкой, готовкой или ремонтом! Лицо остаётся неизменным. Идеально для изучения глаголов и бытовой лексики.
+        </p>
         <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M10 20V18H4V10H2V20C2 21.1 2.9 22 4 22H10C10.55 22 11 21.55 11 21V20H10ZM21.18 8.72C21.46 8.44 21.46 7.99 21.18 7.71L16.29 2.82C16.01 2.54 15.56 2.54 15.28 2.82L14.17 3.93L13.46 3.22C13.18 2.94 12.73 2.94 12.45 3.22L3.22 12.45C2.94 12.73 2.94 13.18 3.22 13.46L3.93 14.17L2.82 15.28C2.54 15.56 2.54 16.01 2.82 16.29L7.71 21.18C7.99 21.46 8.44 21.46 8.72 21.18L19.18 10.72C19.46 10.44 19.46 9.99 19.18 9.71L18.47 9L19.58 7.89L21.18 8.72V8.72ZM10.29 13.71L15.29 8.71L16.71 10.12L11.71 15.12L10.29 13.71Z"/></svg> Chores</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 3L2 12H5V20H19V12H22L12 3ZM12 8.5L17 13H15V18H9V13H7L12 8.5Z"/></svg> Home</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/></svg> Verbs</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg> AI Photo</span>
+          <span class="tag">🧹 Chores</span>
+          <span class="tag">🏠 Home</span>
+          <span class="tag">🗣️ Verbs</span>
+          <span class="tag">✨ AI Photo</span>
         </div>
         <div class="btns">
-          <button class="btn btn-copy" data-target="prompt6">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать
-          </button>
-          <button class="btn out" data-download="prompt6">
-            <svg viewBox="0 0 24 24"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z"/></svg> .txt
-          </button>
+          <button class="btn btn-copy" data-target="prompt6">📋 Копировать</button>
+          <button class="btn out" data-download="prompt6">💾 .txt</button>
         </div>
-        <button class="toggle" data-toggle="prompt6">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/></svg> Показать промпт
-        </button>
-        <div class="code" id="prompt6">Create an image of the person from the original photo performing a household chore (e.g., repairing a table, setting the dining table, taking out the trash, vacuuming the carpet, cooking dinner, doing laundry, washing dishes). Keep the person's face identical to the original image with no modifications.</div>
+        <button class="toggle" data-toggle="prompt6">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt6">Create an image of the person from the original photo performing a household chore (e.g., repairing a table, setting the dining table, taking out the trash, vacuuming the carpet, ironing a tablecloth, cooking dinner, doing laundry, dusting furniture with a duster, washing dishes, mopping the floor, or cleaning windows). Keep the person's face identical to the original image with no modifications. The background, attire, and actions should clearly depict the selected chore while ensuring the face remains unchanged.</div>
       </article>
-
-      <!-- Card 7: Готовый HTML шаблон игры -->
+             <!-- 🎮 Card 7: Готовый HTML шаблон игры -->
       <article class="card">
         <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M20 18C21.1 18 22 17.1 22 16V6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V16C2 17.1 2.9 18 4 18H0V20H24V18H20ZM4 6H20V16H4V6ZM6 12H10V14H6V12ZM12 8H18V10H12V8ZM6 8H10V10H6V8ZM12 12H18V14H12V12Z"/></svg>
-          </div>
-          <h2 class="card-title">Готовый шаблон игры: Tic Tac Toe</h2>
+          <span class="card-emoji">🎮</span>
+          <h2 class="card-title">Готовый шаблон игры (HTML)</h2>
         </div>
         <p class="card-desc">
           <strong>Полный код игры "Крестики-нолики с грамматикой".</strong><br>
-          Ссылки на Teams и Google Sheets уже настроены! Скопируй код, замени 30 строчек с вопросами на свои и загрузи на свой GitHub.
+          Ссылки на Teams и Google Sheets уже настроены! Скачай файл, замени 30 строчек с вопросами на свои и загрузи на свой GitHub.
         </p>
         <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M20 18C21.1 18 22 17.1 22 16V6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V16C2 17.1 2.9 18 4 18H0V20H24V18H20ZM4 6H20V16H4V6ZM6 12H10V14H6V12ZM12 8H18V10H12V8ZM6 8H10V10H6V8ZM12 12H18V14H12V12Z"/></svg> Full HTML</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM17 12H14V15H10V12H7V10H10V7H14V10H17V12Z"/></svg> Auto-Send</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.14 12.94C19.14 12.94 19.14 12.94 19.1......"/></svg> Ready to Use</span>
+          <span class="tag">💻 Full HTML</span>
+          <span class="tag">📊 Auto-Send</span>
+          <span class="tag">⚙️ Ready to Use</span>
         </div>
-        <div class="btns">
+                 <div class="btns">
           <button class="btn btn-copy-game" onclick="copyGameCode()" style="cursor: pointer;">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать код
+            📋 Копировать код
           </button>
           <a href="https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/refs/heads/main/tictactoe-template.html" target="_blank" class="btn out" style="text-decoration: none;">
-            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"/></svg> Открыть
+            👁️ Открыть
           </a>
         </div>
       </article>
-
-      <!-- Card 8: Промпт для генерации вопросов -->
-      <article class="card">
-        <div class="card-head">
-          <div class="card-emoji">
-            <svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-          </div>
-          <h2 class="card-title">Промпт для генерации вопросов</h2>
-        </div>
-        <p class="card-desc">
-          <strong>Сгенерируй 30 вопросов для своей игры!</strong><br>
-          Скопируй промпт, вставь в ChatGPT/Claude/Qwen, укажи свою тему и уровень. Нейросеть выдаст вопросы в правильном формате.
-        </p>
-        <div class="tags">
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg> AI Prompt</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/></svg> 30 Questions</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM17 12H14V15H10V12H7V10H10V7H14V10H17V12Z"/></svg> Auto-Format</span>
-          <span class="tag"><svg viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 4.08-3.05 7.44-7 7.93v2.02c5.06-.5 9-4.76 9-9.95s-3.94-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V3.03c-4.06.5-7.2 3.97-7.2 8.07 0 4.42 3.58 8 8 8v-2.1z"/></svg> Быстро</span>
-        </div>
-        <div class="btns">
-          <button class="btn btn-copy" data-target="prompt8">
-            <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать
-          </button>
-          <button class="btn out" data-download="prompt8">
-            <svg viewBox="0 0 24 24"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z"/></svg> .txt
-          </button>
-        </div>
-        <button class="toggle" data-toggle="prompt8">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/></svg> Показать промпт
-        </button>
-        <div class="code" id="prompt8">Ты — опытный учитель английского языка. Мне нужно создать вопросы для интерактивной игры "Крестики-нолики".
-
-ТЕМА: [ВСТАВЬ СВОЮ ТЕМУ, например: Past Simple / Conditionals / Vocabulary: Travel]
-УРОВЕНЬ: [ВСТАВЬ УРОВЕНЬ, например: A2-B1]
-КОЛИЧЕСТВО: 30 вопросов
-
-КРИТИЧЕСКИ ВАЖНО: Выдай вопросы СТРОГО в следующем формате JavaScript-массива. 
-Каждая строка должна выглядеть так:
-"Текст вопроса с пропуском ___,вариант1,вариант2,вариант3,номер_правильного_ответа"
-
-Где номер_правильного_ответа — это число 1, 2 или 3.
-
-ПРИМЕР ФОРМАТА:
-const rawQuizData = [
-  "Yesterday I ___ to the cinema.,go,went,gone,2",
-  "She ___ TV when I called.,watched,was watching,has watched,2",
-  "They ___ in London for 5 years.,lived,have lived,are living,2"
-];
-
-ТРЕБОВАНИЯ:
-1. В каждом вопросе должен быть один пропуск, обозначенный как ___
-2. Три варианта ответа (A, B, C)
-3. Правильный ответ указан числом (1, 2 или 3)
-4. Вопросы должны быть интересными и жизненными
-5. НЕ добавляй никаких пояснений, только код!
-6. НЕ используй кавычки внутри вопросов
-7. НЕ добавляй переносы строк внутри вопросов
-
-Сгенерируй 30 вопросов в этом точном формате прямо сейчас.</div>
-      </article>
-
-    </div>
-
     <!-- 📚 More -->
     <section class="more">
-      <h3 class="more-title">В разработке</h3>
+      <h3 class="more-title">📚 В разработке</h3>
       <div class="coming">
-        <div class="ic">
-          <svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-        </div>
+        <div class="ic">🪄</div>
         <p><strong>Скоро появятся:</strong></p>
-        <p>Dialogue Builder • Holiday Quest<br>Puzzle Grammar • Travel Stories</p>
+        <p>🗣️ Dialogue Builder • 🎄 Holiday Quest<br>🧩 Puzzle Grammar • ✈️ Travel Stories</p>
         <p style="margin-top:15px;font-size:0.92rem">
           💡 Есть идея? <a href="mailto:suri_samner@mail.ru" style="color:var(--primary);font-weight:500">Напишите!</a>
         </p>
@@ -815,25 +833,14 @@ const rawQuizData = [
 
     <!-- 📱 Footer -->
     <footer>
-      <p>
-        <svg viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg> 
-        для учителей • <a href="mailto:suri_samner@mail.ru">suri_samner@mail.ru</a> • <a href="tel:+79160601011">+7 916 060-10-11</a>
-      </p>
-      <p style="margin-top:12px">
-        <a href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 3L2 12H5V20H19V12H22L12 3ZM12 8.5L17 13H15V18H9V13H7L12 8.5Z"/></svg> 
-          Juliya Magic Teacher
-        </a>
-      </p>
+      <p>✨ для учителей • <a href="mailto:suri_samner@mail.ru">suri_samner@mail.ru</a> • <a href="tel:+79160601011">+7 916 060-10-11</a></p>
+      <p style="margin-top:12px"><a href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank">🏰 Juliya Magic Teacher</a></p>
     </footer>
 
   </div>
 
   <!-- 🍞 Toast -->
-  <div id="toast">
-    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg>
-    Готово!
-  </div>
+  <div id="toast">✅ Готово! ✨</div>
 
   <script>
     function createParticles() {
@@ -875,68 +882,35 @@ const rawQuizData = [
     }
     function toast(m) {
       const t = document.getElementById('toast');
-      t.innerHTML = `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> ${m}`;
-      t.classList.add('show');
+      t.textContent = m; t.classList.add('show');
       setTimeout(()=>t.classList.remove('show'), 2200);
     }
     function copyPrompt(id) {
       const txt = document.getElementById(id).textContent;
       navigator.clipboard.writeText(txt).then(()=>{
-        toast('Скопировано!');
+        toast('✅ Скопировано! ✨');
         document.querySelectorAll(`[data-target="${id}"]`).forEach(btn=>{
-          btn.classList.add('copied'); 
-          btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Готово!';
-          setTimeout(()=>{ 
-            btn.classList.remove('copied'); 
-            btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/></svg> Копировать'; 
-          }, 2000);
+          btn.classList.add('copied'); btn.innerHTML = '✓ Готово!';
+          setTimeout(()=>{ btn.classList.remove('copied'); btn.innerHTML = '📋 Копировать'; }, 2000);
         });
-      }).catch(()=>toast('Ошибка'));
+      }).catch(()=>toast('❌ Ошибка'));
     }
-    function downloadPrompt(id) {
+      function downloadPrompt(id) {
       const txt = document.getElementById(id).textContent;
+      // Проверяем, есть ли у кнопки атрибут data-ext, если нет - по умолчанию txt
       const ext = document.querySelector(`[data-download="${id}"]`)?.dataset.ext || 'txt';
       const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
       const url = URL.createObjectURL(blob), a = document.createElement('a');
       a.href = url; 
-      a.download = `Prompt.${ext}`;
+      a.download = `Prompt.${ext}`; // Теперь будет скачиваться как Prompt.html для 7-й карточки
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(url); toast('Скачивается...');
+      URL.revokeObjectURL(url); toast('💾 Скачивается... ✨');
     }
     function toggleCode(id) {
       const el = document.getElementById(id), btn = document.querySelector(`[data-toggle="${id}"]`);
       el.classList.toggle('show');
-      btn.classList.toggle('active');
-      btn.innerHTML = el.classList.contains('show') 
-        ? '<svg viewBox="0 0 24 24"><path d="M12 8C9.79 8 8 9.79 8 12C8 14.21 9.79 16 12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8ZM12 14C10.9 14 10 13.1 10 12C10 10.9 10.9 10 12 10C13.1 10 14 10.9 14 12C14 13.1 13.1 14 12 14ZM2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"/></svg> Скрыть' 
-        : '<svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"/></svg> Показать';
+      btn.innerHTML = el.classList.contains('show') ? '🙈 Скрыть ▲' : '👁️ Показать ▼';
     }
-    
-    // === ФУНКЦИЯ КОПИРОВАНИЯ КОДА ИГРЫ ===
-    async function copyGameCode() {
-      try {
-        const response = await fetch('https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/refs/heads/main/tictactoe-template.html');
-        const code = await response.text();
-        await navigator.clipboard.writeText(code);
-        
-        toast('Код игры скопирован!');
-        
-        const btn = document.querySelector('.btn-copy-game');
-        if (btn) {
-          const originalHTML = btn.innerHTML;
-          btn.classList.add('copied');
-          btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg> Скопировано!';
-          setTimeout(() => {
-            btn.classList.remove('copied');
-            btn.innerHTML = originalHTML;
-          }, 2500);
-        }
-      } catch (err) {
-        console.error('Failed to copy:', err);
-        toast('Не удалось скопировать');
-      }
-    }
-
     document.addEventListener('DOMContentLoaded', ()=>{
       createParticles(); createStars();
       document.querySelectorAll('.btn-copy').forEach(b=>b.onclick=(e)=>{createSparkle(e.clientX,e.clientY);copyPrompt(b.dataset.target);});
@@ -944,13 +918,11 @@ const rawQuizData = [
       document.querySelectorAll('.toggle').forEach(b=>b.onclick=()=>toggleCode(b.dataset.toggle));
       document.getElementById('copyAllBtn')?.addEventListener('click', (e)=>{
         createSparkle(e.clientX,e.clientY);
-        // Updated to include prompt 8, excluding 7 (which is fetched via URL)
-        const all = [1,2,3,4,5,6,8].map(i=>document.getElementById('prompt'+i)?.textContent).filter(Boolean).join('\n\n---\n\n');
-        navigator.clipboard.writeText(all).then(()=>toast('Всё скопировано!'));
+        const all = [1,2,3,4,5,6].map(i=>document.getElementById('prompt'+i)?.textContent).filter(Boolean).join('\n\n---\n\n');
+        navigator.clipboard.writeText(all).then(()=>toast('✅ Всё скопировано! ✨'));
       });
     });
-
-    // === ВСТАВКА ПОЛНОГО КОДА ИГРЫ В КАРТОЧКУ 7 ===
+        // === ВСТАВКА ПОЛНОГО КОДА ИГРЫ В КАРТОЧКУ 7 ===
     const fullGameCode = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1691,6 +1663,40 @@ const rawQuizData = [
     // Вставляем код в карточку
     document.getElementById('prompt7').textContent = fullGameCode;
     // ==========================================
+        // === ФУНКЦИЯ КОПИРОВАНИЯ КОДА ИГРЫ ===
+    async function copyGameCode() {
+      try {
+        const response = await fetch('https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/refs/heads/main/tictactoe-template.html');
+        const code = await response.text();
+        await navigator.clipboard.writeText(code);
+        
+        // Показываем красивое уведомление (используем твою существующую функцию toast)
+        if (typeof toast === 'function') {
+          toast('✅ Код игры скопирован! ✨');
+        } else {
+          alert('✅ Код скопирован! Теперь вставь его в свой GitHub файл index.html');
+        }
+        
+        // Меняем текст кнопки на 2 секунды
+        const btn = document.querySelector('.btn-copy-game');
+        if (btn) {
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '✓ Скопировано!';
+          btn.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = '';
+          }, 2500);
+        }
+      } catch (err) {
+        console.error('Failed to copy:', err);
+        if (typeof toast === 'function') {
+          toast('❌ Ошибка копирования');
+        } else {
+          alert(' Не удалось скопировать. Попробуйте вручную.');
+        }
+      }
+    }
   </script>
 </body>
 </html>
