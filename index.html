@@ -143,6 +143,20 @@
     /* 🎯 MAIN TITLE */
     .main-title { text-align: center; padding: 35px 15px 40px; animation: titleIn 0.8s var(--ease); }
     @keyframes titleIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .title-star {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 10px;
+      animation: starPulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(78, 205, 196, 0.8));
+    }
+    .title-star:last-child {
+      animation-delay: 1s;
+    }
+    @keyframes starPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+      50% { transform: scale(1.15) rotate(10deg); opacity: 1; }
+    }
     .title-big {
       font-size: 3.3rem; font-weight: 700;
       background: linear-gradient(135deg, var(--primary), var(--primary-2), #a8e6ff);
@@ -531,7 +545,15 @@
     
     <!-- 🎯 Title -->
     <header class="main-title">
-      <h1 class="title-big">✨ Juliya's Prompts Collection</h1>
+    <h1 class="title-big">
+  <svg class="title-star" viewBox="0 0 24 24" width="40" height="40">
+    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#4ecdc4"/>
+  </svg>
+  Juliya's Prompts Collection
+  <svg class="title-star" viewBox="0 0 24 24" width="40" height="40">
+    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#4ecdc4"/>
+  </svg>
+</h1>
       <p class="title-sub">Волшебные промпты для создания интерактивных игр • Копируй • Вставляй • Твори магию</p>
     </header>
 
