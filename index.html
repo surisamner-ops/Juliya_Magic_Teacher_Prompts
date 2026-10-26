@@ -926,7 +926,7 @@ Generate the game now.</div>
         <button class="toggle" data-toggle="prompt6">👁️ Показать промпт ▼</button>
         <div class="code" id="prompt6">Create an image of the person from the original photo performing a household chore (e.g., repairing a table, setting the dining table, taking out the trash, vacuuming the carpet, ironing a tablecloth, cooking dinner, doing laundry, dusting furniture with a duster, washing dishes, mopping the floor, or cleaning windows). Keep the person's face identical to the original image with no modifications. The background, attire, and actions should clearly depict the selected chore while ensuring the face remains unchanged.</div>
       </article>
-             <!-- 🎮 Card 7: Готовый HTML шаблон игры -->
+               <!-- 🎮 Card 7: Готовый HTML шаблон игры -->
       <article class="card">
         <div class="card-head">
           <span class="card-emoji">🎮</span>
@@ -941,7 +941,7 @@ Generate the game now.</div>
           <span class="tag">📊 Auto-Send</span>
           <span class="tag">⚙️ Ready to Use</span>
         </div>
-                 <div class="btns">
+        <div class="btns">
           <button class="btn btn-copy-game" onclick="copyGameCode()" style="cursor: pointer;">
             📋 Копировать код
           </button>
@@ -950,20 +950,21 @@ Generate the game now.</div>
           </a>
         </div>
       </article>
-        <!-- Card 8: Промпт для генерации вопросов -->
+
+      <!-- 🤖 Card 8: Промпт для генерации вопросов -->
       <article class="card">
         <div class="card-head">
           <span class="card-emoji"></span>
-          <h2 class="card-title">🤖 Промпт для генерации вопросов</h2>
+          <h2 class="card-title"><span class="emoji-icon">🤖</span> Промпт для генерации вопросов</h2>
         </div>
         <p class="card-desc">
           <strong>Сгенерируй 30 вопросов для своей игры!</strong><br>
           Скопируй промпт, вставь в ChatGPT/Claude/Qwen, укажи свою тему и уровень. Нейросеть выдаст вопросы в правильном формате.
         </p>
         <div class="tags">
-          <span class="tag"> AI Prompt</span>
+          <span class="tag">🤖 AI Prompt</span>
           <span class="tag">❓ 30 Questions</span>
-          <span class="tag"> Auto-Format</span>
+          <span class="tag">⚙️ Auto-Format</span>
           <span class="tag">⚡ Быстро</span>
         </div>
         <div class="btns">
@@ -977,7 +978,7 @@ Generate the game now.</div>
 УРОВЕНЬ: [ВСТАВЬ УРОВЕНЬ, например: A2-B1]
 КОЛИЧЕСТВО: 30 вопросов
 
- КРИТИЧЕСКИ ВАЖНО: Выдай вопросы СТРОГО в следующем формате JavaScript-массива. 
+КРИТИЧЕСКИ ВАЖНО: Выдай вопросы СТРОГО в следующем формате JavaScript-массива. 
 Каждая строка должна выглядеть так:
 "Текст вопроса с пропуском ___,вариант1,вариант2,вариант3,номер_правильного_ответа"
 
@@ -1001,20 +1002,22 @@ const rawQuizData = [
 
 Сгенерируй 30 вопросов в этом точном формате прямо сейчас.</div>
       </article>
-             <!-- 📚 More -->
+    </div> <!-- ⚠️ ВОТ ЗДЕСЬ ЗАКРЫВАЕТСЯ СЕТКА КАРТОЧЕК! -->
+
+    <!-- 📚 В разработке (ТЕПЕРЬ ОНА СНАРУЖИ СЕТКИ И БУДЕТ КРАСИВОЙ) -->
     <section class="more">
       <h3 class="more-title">📚 В разработке</h3>
       <div class="coming">
         <div class="ic">✨</div>
         <p><strong>Скоро появятся:</strong></p>
-        <p>🎙️ Dialogue Builder • 🎄 Holiday Quest<br> Puzzle Grammar • ✈️ Travel Stories</p>
+        <p>🎙️ Dialogue Builder • 🎄 Holiday Quest<br>🧩 Puzzle Grammar • ✈️ Travel Stories</p>
         <p style="margin-top:15px;font-size:0.92rem">
           💡 Есть идея? <a href="mailto:suri_samner@mail.ru" style="color:var(--primary);font-weight:500">Напишите!</a>
         </p>
       </div>
     </section>
 
-    <!-- 💜 Contact Me (по центру, вытянутый) -->
+    <!-- 💜 Contact Me (ТЕПЕРЬ ОН НА ВСЮ ШИРИНУ) -->
     <section class="contact-section">
       <div class="contact-box">
         <h3 class="contact-title">
@@ -1048,7 +1051,6 @@ const rawQuizData = [
         </p>
       </div>
     </section>
-    </div>
   <!-- 🍞 Toast -->
   <div id="toast">✅ Готово! ✨</div>
 
