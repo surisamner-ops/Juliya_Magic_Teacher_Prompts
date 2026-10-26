@@ -295,12 +295,130 @@
     .coming:hover { border-color: var(--primary); box-shadow: 0 0 30px var(--primary-glow); }
     .coming .ic { font-size: 2.5rem; margin-bottom: 14px; animation: emojiBounce 2.4s ease-in-out infinite; }
 
-    /* 📱 Footer */
-    footer { text-align: center; padding: 30px 15px 50px; color: var(--text-dim); font-size: 0.93rem; animation: fadeIn 0.7s var(--ease) 0.5s both; }
-    footer a { color: var(--primary); text-decoration: none; transition: all 0.25s var(--ease); position: relative; }
-    footer a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--primary); transition: width 0.25s; }
-    footer a:hover { text-shadow: 0 0 12px var(--primary-glow); }
-    footer a:hover::after { width: 100%; }
+       /* 💜 Contact Me Section */
+    .contact-section {
+      text-align: center;
+      padding: 30px 15px 50px;
+      animation: fadeIn 0.7s var(--ease) 0.5s both;
+    }
+    .contact-box {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.08), rgba(96, 165, 250, 0.08));
+      background-size: 200% 200%;
+      animation: gradientShift 6s ease infinite, glow 3s ease-in-out infinite;
+      border: 1px solid rgba(192, 132, 252, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(192, 132, 252, 0.4), 0 0 40px rgba(96, 165, 250, 0.2); }
+      50% { box-shadow: 0 0 40px rgba(192, 132, 252, 0.8), 0 0 80px rgba(96, 165, 250, 0.5); }
+    }
+    .contact-title {
+      font-family: var(--font);
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--primary), #ffffff, var(--primary-2), var(--primary));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .contact-star {
+      width: 22px;
+      height: 22px;
+      vertical-align: middle;
+      margin: 0 8px;
+      animation: sparkle 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.8));
+      -webkit-text-fill-color: var(--primary);
+    }
+    .contact-star:last-child {
+      animation-delay: 1s;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      padding: 10px 18px;
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.12), rgba(96, 165, 250, 0.12));
+      border-radius: 50px;
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.15);
+    }
+    .contact-link:hover {
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.25), rgba(96, 165, 250, 0.25));
+      border-color: var(--primary);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 20px rgba(192, 132, 252, 0.4);
+    }
+    .contact-icon {
+      font-size: 1.1em;
+      filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.8));
+      animation: floatEmoji 2s ease-in-out infinite;
+    }
+    @keyframes floatEmoji {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    .main-site-link {
+      display: inline-block;
+      margin: 10px 0 20px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.15), rgba(96, 165, 250, 0.15));
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+      border: 1px solid rgba(192, 132, 252, 0.4);
+      border-radius: 50px;
+      color: #ffffff;
+      text-decoration: none;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 0 15px rgba(192, 132, 252, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+    .main-site-link:hover {
+      background: linear-gradient(135deg, rgba(192, 132, 252, 0.3), rgba(96, 165, 250, 0.3));
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 25px rgba(192, 132, 252, 0.4);
+    }
+    .copyright {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+    .copyright strong {
+      color: var(--primary);
+    }
 
     /* 🍞 Toast */
     #toast {
@@ -862,25 +980,50 @@ const rawQuizData = [
 
 Сгенерируй 30 вопросов в этом точном формате прямо сейчас.</div>
       </article>
-    <!-- 📚 More -->
+      <!-- 📚 More -->
     <section class="more">
-      <h3 class="more-title">📚 В разработке</h3>
+      <h3 class="more-title">В разработке</h3>
       <div class="coming">
-        <div class="ic">🪄</div>
+        <div class="ic">✨</div>
         <p><strong>Скоро появятся:</strong></p>
-        <p>🗣️ Dialogue Builder • 🎄 Holiday Quest<br>🧩 Puzzle Grammar • ✈️ Travel Stories</p>
+        <p>🎙️ Dialogue Builder • 🎄 Holiday Quest<br>🧩 Puzzle Grammar • ✈️ Travel Stories</p>
         <p style="margin-top:15px;font-size:0.92rem">
           💡 Есть идея? <a href="mailto:suri_samner@mail.ru" style="color:var(--primary);font-weight:500">Напишите!</a>
         </p>
       </div>
     </section>
 
-    <!-- 📱 Footer -->
-    <footer>
-      <p>✨ для учителей • <a href="mailto:suri_samner@mail.ru">suri_samner@mail.ru</a> • <a href="tel:+79160601011">+7 916 060-10-11</a></p>
-      <p style="margin-top:12px"><a href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank">🏰 Juliya Magic Teacher</a></p>
-    </footer>
-
+       <!-- 💜 Contact Me -->
+    <section class="contact-section">
+      <div class="contact-box">
+        <h3 class="contact-title">
+          <span class="contact-star">✦</span>
+          Contact Me
+          <span class="contact-star">✦</span>
+        </h3>
+        <div class="contact-links">
+          <a href="mailto:suri_samner@mail.ru" class="contact-link">
+            <span class="contact-icon">📧</span>
+            <span>suri_samner@mail.ru</span>
+          </a>
+          <a href="https://t.me/+79160601011" class="contact-link" target="_blank">
+            <span class="contact-icon">✈️</span>
+            <span>Telegram</span>
+          </a>
+          <a href="tel:+79160601011" class="contact-link">
+            <span class="contact-icon">📱</span>
+            <span>+7 (916) 060-10-11</span>
+          </a>
+        </div>
+        <a href="https://surisamner-ops.github.io/Juliya_Magic_Teacher-/" target="_blank" class="main-site-link">
+          🌐 Visit my main website to learn more!
+        </a>
+        <p class="copyright">
+          © 2026 <strong>Juliya Magic Teacher</strong>. All rights reserved.<br>
+          <span style="font-size: 0.9em; opacity: 0.9;">Made with 💜 for English learners</span>
+        </p>
+      </div>
+    </section>
   </div>
 
   <!-- 🍞 Toast -->
