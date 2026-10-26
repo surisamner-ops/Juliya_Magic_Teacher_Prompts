@@ -556,117 +556,112 @@
           <button class="btn out" data-download="prompt1">💾 .txt</button>
         </div>
         <button class="toggle" data-toggle="prompt1">👁️ Показать промпт ▼</button>
-        <div class="code" id="prompt1">Create an interactive browser-based educational game called "Quest Wheel" as a SINGLE self-contained HTML file (embedded CSS and JS, no external dependencies except Google Fonts 'Fredoka').
+        <div class="code" id="prompt1">Create an interactive browser-based educational wheel game called "[GAME_TITLE]" for language learning or classroom activities. The game must be fully self-contained (single HTML file with embedded CSS and JS).
 
-═══════════════════════════════════════════
-🎓 MY SETTINGS — FILL THIS SECTION:
-═══════════════════════════════════════════
-
-[GAME_TITLE] = "Quest Wheel"
-[GAME_SUBTITLE] = "Spin the wheel! Answer & learn! ✨"
-[SEGMENT_COUNT] = 7
-[RESULT_BOX_LABEL] = "Your question appears here... 🪄"
-[COMPLETION_MESSAGE] = "🎉 Amazing! You've answered all questions!"
-[AUDIO_ENABLED] = true
-
-[THEME_COLORS] = {
-  primary: "#ffd700",
-  background: ["#1a1a2e", "#16213e", "#0f0c29"],
+🎨 TEACHER CUSTOMIZATION PANEL — EDIT(РЕДАКТИРОВАТЬ) ONLY THIS SECTION:
+================================================================
+[GAME_TITLE] = "Career Quest Wheel"                    // ← Change game name
+[GAME_SUBTITLE] = "Spin the wheel! Answer & learn! ✨" // ← Short description
+[THEME_COLORS] = {                                     // ← Optional: change colors
+  primary: "#ffd700",      // golden accent
+  background: ["#1a1a2e", "#16213e", "#0f0c29"], // gradient
   segments: ["#9b59b6", "#3498db", "#2ecc71", "#e67e22", "#1abc9c", "#f1c40f", "#e91e63"]
 }
-
-[QUESTIONS] = [
-  "Question 1 goes here",
-  "Question 2 goes here",
-  "Question 3 goes here",
-  "Question 4 goes here",
-  "Question 5 goes here",
-  "Question 6 goes here",
-  "Question 7 goes here"
+[SEGMENT_COUNT] = 7                                    // ← Number of questions (5-12 recommended)
+[QUESTIONS] = [                                        // ← EDIT YOUR QUESTIONS HERE
+  " QUESTION 1",
+  " QUESTION 2",
+  " QUESTION 3",
+  " QUESTION 4",
+  " QUESTION 5",
+  " QUESTION 6",
+  " QUESTION 7"
 ]
+[RESULT_BOX_LABEL] = "Your question appears here... 🪄" // ← Placeholder text
+[COMPLETION_MESSAGE] = "🎉 Amazing! You've answered all questions!" // ← End game text
+[AUDIO_ENABLED] = true                                 // ← Set false to disable sound
+[FONT_FAMILY] = "'Fredoka', sans-serif"                // ← Change font if needed
+================================================================
 
-═══════════════════════════════════════════
-🎨 DESIGN & ATMOSPHERE:
-═══════════════════════════════════════════
+🎨 DESIGN & ATMOSPHERE (auto-generated from panel above):
+- Background: gradient from [THEME_COLORS.background]
+- Accent color: [THEME_COLORS.primary] with glow effects
+- Font: [FONT_FAMILY]
+- Animated twinkling stars background (80+ elements)
+- Optional magical element: animated fairy 🧚✨ or theme-appropriate icon
+- Control buttons: 🔇 mute toggle + 🏰 home button (top-right)
+- All interactive elements with smooth hover animations
 
-- Background: linear-gradient from [THEME_COLORS.background]
-- Accent color: [THEME_COLORS.primary] with subtle glow effects
-- Font: 'Fredoka' from Google Fonts
-- Animated twinkling stars background (80+ CSS-generated elements)
-- Animated floating fairy 🧚✨ in the bottom right corner
-- Control buttons in top-right (fixed): 🔇 mute toggle + 🏰 reset button
-- All interactive elements must have smooth hover animations and transitions
-
-🎡 THE WHEEL (SVG Implementation):
-- Circular wheel, 500px diameter (responsive via CSS variables)
-- [SEGMENT_COUNT] colored segments using SVG paths
-- Golden pointer marker (▼) at the top center with pulsing animation
-- Center hub: 🎯 emoji, absolutely centered
-- Each segment displays the QUESTION TEXT inside the SVG
-
-⚠️ CRITICAL REQUIREMENT — TEXT RENDERING ON THE WHEEL:
-The text MUST be LARGE and READABLE. Use SVG <text> with <tspan> for multiline text:
-- font-size: 14px (desktop), 11px (≤600px), 9px (≤420px)
-- font-weight: 600, fill: white
-- text-anchor: middle, dominant-baseline: middle
-- text-shadow: 0 1px 3px rgba(0,0,0,0.8)
-- Position text at exactly 72% of the radius from the center (closer to the edge)
-- Rotate text to match the segment's center angle
-- Auto-wrap text: ~25 characters per line, max 4 lines per question
-- Line height: 16px
-- Create a `truncateText(text, maxLen=55)` function to cut off overly long questions with "..."
-- Used segments: opacity 0.3 + grayscale filter
-- Active segment: brightness(1.3) + gold drop-shadow
+🎡 THE WHEEL (auto-calculated):
+- Circular wheel, 500px diameter (responsive for mobile)
+- [SEGMENT_COUNT] colored segments using conic-gradient from [THEME_COLORS.segments]
+- Golden pointer marker at top with pulsing animation
+- Center hub: 🎯 or theme-appropriate emoji
+- Each segment displays one question from [QUESTIONS] array
+- Question text boxes: auto-positioned along radius, auto-rotated for readability
 
 🔄 GAME LOGIC:
-1. On load: Initialize state, all questions are available.
-2. Button "🎡 SPIN!" triggers rotation:
-   - 5 to 8 full spins + random offset to land on an AVAILABLE segment.
-   - Smooth deceleration using `cubic-bezier(0.25, 0.1, 0.25, 1)` over 4 seconds.
-   - Optional rapid "tick" sounds during spin (if audio enabled).
+1. On load: all [SEGMENT_COUNT] questions available
+2. Button "[GAME_TITLE] — SPIN!" triggers rotation:
+   - 5-8 full spins + random offset
+   - Smooth deceleration (cubic-bezier easing)
+   - Optional "tick" sounds during spin (if [AUDIO_ENABLED] = true)
 3. After wheel stops:
-   - The COMPLETE, untruncated selected question appears in the result-box below the wheel.
-   - Result-box gets a smooth `fade-in + slide-up` CSS animation and a golden border glow.
-   - Selected segment on the wheel gets a bright highlight/glow.
-   - Magic chime sound plays.
-4. Button text changes to "✅ Answered! Next ➜".
-5. On second click (Confirm Answer):
-   - Question is marked as used (segment fades out smoothly).
-   - Confetti animation (60 particles) triggers.
-   - Fanfare sound plays.
-   - Button resets to "🎡 SPIN!".
-6. When all questions are completed:
-   - Show modal overlay with [COMPLETION_MESSAGE].
-   - "🔄 Start New Game" button resets all state.
+   - Wheel auto-aligns to nearest segment center
+   - ✅ KEY: Selected question appears in SEPARATE FIELD below wheel (result-box)
+   - Selected segment on wheel gets highlight glow
+   - Optional magic sound plays
+4. Button changes to "✅ Answered! Next ➜"
+5. On second click:
+   - Question marked as used (fades from wheel, progress dot updates)
+   - Optional confetti animation 🎉
+   - Button resets for next spin
+6. When all questions completed:
+   - Show modal: "[COMPLETION_MESSAGE]"
+   - "🔄 Start New Game" button resets everything
 
-🔊 AUDIO SYSTEM (Web Audio API ONLY — NO external files):
-- `playClick()`: short, high-frequency sine wave blip for wheel ticks.
-- `playMagicChime()`: pleasant major chord (C-E-G-C) when question is selected.
-- `playFanfare()`: short celebration sound when answer is confirmed.
-- 🔇/🔊 toggle button updates state.
-- AudioContext must be initialized/resumed on the first user click.
+🔊 AUDIO SYSTEM (if [AUDIO_ENABLED] = true):
+- Use Web Audio API only — NO external files
+- playClick(): short tone for wheel ticks
+- playMagicChime(): pleasant chord when question selected
+- playFanfare(): celebration sound when question answered
+- 🔇/🔊 toggle button included
+- AudioContext initialized on first user click (browser compliance)
 
 📊 PROGRESS & UI:
-- Progress text: "Questions left: X/[SEGMENT_COUNT]"
-- Progress dots: Gold = available, Gray = used, Glowing white = currently active.
-- Fully responsive: scales gracefully for screens <600px and <420px.
+- Progress indicator: "Questions left: [dots] X/[SEGMENT_COUNT]"
+- Dot states: gold (available) → gray (used) → glowing (active)
+- Result display field (result-box):
+  * Shows label: "[RESULT_BOX_LABEL]" when empty
+  * Displays selected question with fade-in + slide-up animation
+  * Golden border glow when active
+  * Clears after "✅ Answered!" clicked
+- Fully responsive: scales for <600px and <420px screens
+
+🎯 CRITICAL REQUIREMENT:
+After spin, the selected question MUST appear in a dedicated, visually distinct field (result-box) below the wheel — this is the main reading area for students. It must:
+- Have smooth entrance animation
+- Feature accent-color border when active
+- Clear after user confirms answer
+- Be empty state labeled with [RESULT_BOX_LABEL]
 
 📦 TECHNICAL SPECIFICATIONS:
-- Single HTML file, zero external dependencies (except Google Fonts link).
-- Vanilla JavaScript only, using a `QuestWheelGame` class.
-- CSS animations via `@keyframes`.
-- Confetti: 60 DOM particles with randomized trajectories, cleaned up after animation.
-- Keyboard support: Spacebar or Enter key triggers the main action button.
-- State management object: `isSpinning`, `hasSpun`, `currentRotation`, `availableIndices`, `usedIndices`, `currentTargetIndex`.
-- `aria-label` attributes on all icon-only buttons.
+- Single HTML file, zero external dependencies (except Google Fonts if used)
+- Vanilla JavaScript, no frameworks
+- CSS animations via @keyframes
+- Confetti: 60 particles with randomized properties (if enabled)
+- Keyboard support: Space/Enter for spin/answer
+- State management: isSpinning, gameState, availableQuestions/usedQuestions arrays
 
-✨ POLISH:
-- Button shine/sweep effect on hover using CSS pseudo-elements.
-- Subtle pulse animations on the pointer.
-- High contrast text (white with dark shadow on colored segments).
-- Overall aesthetic: magical, friendly, encouraging.
+✨ POLISH & ACCESSIBILITY:
+- Button shine effect on hover
+- Subtle pulse animations to guide attention
+- Used questions fade smoothly from wheel
+- High contrast text for readability
+- ARIA labels for buttons (accessibility)
+- Overall magical/friendly aesthetic — feels like play, not a test
 
-At the VERY TOP of the <script> section, create a clearly marked " TEACHER SETTINGS" JavaScript object that mirrors the MY SETTINGS section above. Generate complete, production-ready code.</div>
+Generate complete, production-ready code. At the TOP of the JavaScript section, create a clearly marked "🎓 TEACHER SETTINGS" object that mirrors the Customization Panel above, so teachers can edit questions/settings without touching game logic. Add comments like "// ✏️ EDIT QUESTIONS BELOW" for easy navigation.</div>
       </article>
 
       <!-- ⭕ Card 2: Tic Tac Toe -->
