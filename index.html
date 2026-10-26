@@ -566,7 +566,7 @@
 [GAME_SUBTITLE] = "Spin the wheel! Answer & learn! ✨"
 [SEGMENT_COUNT] = 7
 [RESULT_BOX_LABEL] = "Your question appears here... 🪄"
-[COMPLETION_MESSAGE] = "🎉 Amazing! You've answered all questions!"
+[COMPLETION_MESSAGE] = " Amazing! You've answered all questions!"
 [AUDIO_ENABLED] = true
 
 [THEME_COLORS] = {
@@ -593,19 +593,19 @@
 - Accent color: [THEME_COLORS.primary] with subtle glow effects
 - Font: 'Fredoka' from Google Fonts
 - Animated twinkling stars background (80+ CSS-generated elements)
-- Animated floating fairy 🧚✨ in the bottom right corner
-- Control buttons in top-right (fixed): 🔇 mute toggle + 🏰 reset button
+- Animated floating fairy in the bottom right corner
+- Control buttons in top-right (fixed): mute toggle + reset button
 - All interactive elements must have smooth hover animations and transitions
 
 🎡 THE WHEEL (SVG Implementation):
 - Circular wheel, 500px diameter (responsive via CSS variables)
 - [SEGMENT_COUNT] colored segments using SVG paths
-- Golden pointer marker (▼) at the top center with pulsing animation
-- Center hub: 🎯 emoji, absolutely centered
+- Golden pointer marker at the top center with pulsing animation
+- Center hub: target emoji, absolutely centered
 - Each segment displays the QUESTION TEXT inside the SVG
 
 ⚠️ CRITICAL REQUIREMENT — TEXT RENDERING ON THE WHEEL:
-The text MUST be LARGE and READABLE. Use SVG <text> with <tspan> for multiline text:
+The text MUST be LARGE and READABLE. Use SVG text elements with tspan for multiline text:
 - font-size: 14px (desktop), 11px (≤600px), 9px (≤420px)
 - font-weight: 600, fill: white
 - text-anchor: middle, dominant-baseline: middle
@@ -614,51 +614,51 @@ The text MUST be LARGE and READABLE. Use SVG <text> with <tspan> for multiline t
 - Rotate text to match the segment's center angle
 - Auto-wrap text: ~25 characters per line, max 4 lines per question
 - Line height: 16px
-- Create a `truncateText(text, maxLen=55)` function to cut off overly long questions with "..."
+- Create a truncateText(text, maxLen=55) function to cut off overly long questions with "..."
 - Used segments: opacity 0.3 + grayscale filter
 - Active segment: brightness(1.3) + gold drop-shadow
 
 🔄 GAME LOGIC:
 1. On load: Initialize state, all questions are available.
-2. Button "🎡 SPIN!" triggers rotation:
+2. Button "SPIN!" triggers rotation:
    - 5 to 8 full spins + random offset to land on an AVAILABLE segment.
-   - Smooth deceleration using `cubic-bezier(0.25, 0.1, 0.25, 1)` over 4 seconds.
+   - Smooth deceleration using cubic-bezier(0.25, 0.1, 0.25, 1) over 4 seconds.
    - Optional rapid "tick" sounds during spin (if audio enabled).
 3. After wheel stops:
    - The COMPLETE, untruncated selected question appears in the result-box below the wheel.
-   - Result-box gets a smooth `fade-in + slide-up` CSS animation and a golden border glow.
+   - Result-box gets a smooth fade-in + slide-up CSS animation and a golden border glow.
    - Selected segment on the wheel gets a bright highlight/glow.
    - Magic chime sound plays.
-4. Button text changes to "✅ Answered! Next ➜".
+4. Button text changes to "Answered! Next".
 5. On second click (Confirm Answer):
    - Question is marked as used (segment fades out smoothly).
    - Confetti animation (60 particles) triggers.
    - Fanfare sound plays.
-   - Button resets to "🎡 SPIN!".
+   - Button resets to "SPIN!".
 6. When all questions are completed:
    - Show modal overlay with [COMPLETION_MESSAGE].
-   - "🔄 Start New Game" button resets all state.
+   - "Start New Game" button resets all state.
 
 🔊 AUDIO SYSTEM (Web Audio API ONLY — NO external files):
-- `playClick()`: short, high-frequency sine wave blip for wheel ticks.
-- `playMagicChime()`: pleasant major chord (C-E-G-C) when question is selected.
-- `playFanfare()`: short celebration sound when answer is confirmed.
-- 🔇/🔊 toggle button updates state.
+- playClick(): short, high-frequency sine wave blip for wheel ticks.
+- playMagicChime(): pleasant major chord when question is selected.
+- playFanfare(): short celebration sound when answer is confirmed.
+- Mute toggle button updates state.
 - AudioContext must be initialized/resumed on the first user click.
 
 📊 PROGRESS & UI:
 - Progress text: "Questions left: X/[SEGMENT_COUNT]"
 - Progress dots: Gold = available, Gray = used, Glowing white = currently active.
-- Fully responsive: scales gracefully for screens <600px and <420px.
+- Fully responsive: scales gracefully for screens less than 600px and 420px.
 
 📦 TECHNICAL SPECIFICATIONS:
 - Single HTML file, zero external dependencies (except Google Fonts link).
-- Vanilla JavaScript only, using a `QuestWheelGame` class.
-- CSS animations via `@keyframes`.
+- Vanilla JavaScript only, using a QuestWheelGame class.
+- CSS animations via @keyframes.
 - Confetti: 60 DOM particles with randomized trajectories, cleaned up after animation.
 - Keyboard support: Spacebar or Enter key triggers the main action button.
-- State management object: `isSpinning`, `hasSpun`, `currentRotation`, `availableIndices`, `usedIndices`, `currentTargetIndex`.
-- `aria-label` attributes on all icon-only buttons.
+- State management object: isSpinning, hasSpun, currentRotation, availableIndices, usedIndices, currentTargetIndex.
+- aria-label attributes on all icon-only buttons.
 
 ✨ POLISH:
 - Button shine/sweep effect on hover using CSS pseudo-elements.
@@ -666,7 +666,7 @@ The text MUST be LARGE and READABLE. Use SVG <text> with <tspan> for multiline t
 - High contrast text (white with dark shadow on colored segments).
 - Overall aesthetic: magical, friendly, encouraging.
 
-At the VERY TOP of the <script> section, create a clearly marked " TEACHER SETTINGS" JavaScript object that mirrors the MY SETTINGS section above. Generate complete, production-ready code.
+At the VERY TOP of the script section, create a clearly marked "TEACHER SETTINGS" JavaScript object that mirrors the MY SETTINGS section above. Generate complete, production-ready code.
   </div>
       </article>
 
