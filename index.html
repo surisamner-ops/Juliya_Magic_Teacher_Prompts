@@ -791,7 +791,7 @@ Generate the game now.</div>
       <article class="card">
         <div class="card-head">
           <span class="card-emoji">🎮</span>
-          <h2 class="card-title">Готовый шаблон игры (HTML)</h2>
+          <h2 class="card-title">Готовый шаблон игры: Tic Tac Toe (HTML)</h2>
         </div>
         <p class="card-desc">
           <strong>Полный код игры "Крестики-нолики с грамматикой".</strong><br>
@@ -1649,6 +1649,57 @@ Generate the game now.</div>
             <p>You have switched away from the game tab.<br>This action has been recorded by the system.</p>
             <button class="warning-btn" onclick="closeTabWarning()">Got it, continue</button>
         <\/div>
+              <!-- 🪄 Card 8: Промпт для генерации вопросов -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🪄</span>
+          <h2 class="card-title">Промпт для генерации вопросов</h2>
+        </div>
+        <p class="card-desc">
+          <strong>Сгенерируй 30 вопросов для своей игры!</strong><br>
+          Скопируй промпт, вставь в ChatGPT/Claude/Qwen, укажи свою тему и уровень. Нейросеть выдаст вопросы в правильном формате — просто замени ими старые в коде игры.
+        </p>
+        <div class="tags">
+          <span class="tag"> AI Prompt</span>
+          <span class="tag">❓ 30 Questions</span>
+          <span class="tag"> Auto-Format</span>
+          <span class="tag">⚡ Быстро</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="prompt8"> Копировать</button>
+          <button class="btn out" data-download="prompt8"> .txt</button>
+        </div>
+        <button class="toggle" data-toggle="prompt8">👁️ Показать промпт ▼</button>
+        <div class="code" id="prompt8">Ты — опытный учитель английского языка. Мне нужно создать вопросы для интерактивной игры "Крестики-нолики".
+
+ТЕМА: [ВСТАВЬ СВОЮ ТЕМУ, например: Past Simple / Conditionals / Vocabulary: Travel]
+УРОВЕНЬ: [ВСТАВЬ УРОВЕНЬ, например: A2-B1]
+КОЛИЧЕСТВО: 30 вопросов
+
+️ КРИТИЧЕСКИ ВАЖНО: Выдай вопросы СТРОГО в следующем формате JavaScript-массива. 
+Каждая строка должна выглядеть так:
+"Текст вопроса с пропуском ___,вариант1,вариант2,вариант3,номер_правильного_ответа"
+
+Где номер_правильного_ответа — это число 1, 2 или 3.
+
+ПРИМЕР ФОРМАТА:
+const rawQuizData = [
+  "Yesterday I ___ to the cinema.,go,went,gone,2",
+  "She ___ TV when I called.,watched,was watching,has watched,2",
+  "They ___ in London for 5 years.,lived,have lived,are living,2"
+];
+
+ ТРЕБОВАНИЯ:
+1. В каждом вопросе должен быть один пропуск, обозначенный как ___
+2. Три варианта ответа (A, B, C)
+3. Правильный ответ указан числом (1, 2 или 3)
+4. Вопросы должны быть интересными и жизненными
+5. НЕ добавляй никаких пояснений, только код!
+6. НЕ используй кавычки внутри вопросов
+7. НЕ добавляй переносы строк внутри вопросов
+
+Сгенерируй 30 вопросов в этом точном формате прямо сейчас.</div>
+      </article>
     <\/div>
 <\/body>
 <\/html>`;
