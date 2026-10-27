@@ -1053,6 +1053,31 @@ const rawQuizData = [
 
 Сгенерируй 30 вопросов в этом точном формате прямо сейчас.</div>
       </article>
+            <!-- 🎮 Card 9: Active & Passive Voice Portal -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🚀</span>
+          <h2 class="card-title">Active & Passive Voice: Cyber Portal</h2>
+        </div>
+        <p class="card-desc">
+          <strong>Полный код игры "Кибер-портал: Активный и пассивный залог".</strong><br>
+          45 вопросов со всеми временами 9 класса! 20 случайных вопросов за игру, 2 уровня сложности, персонажи, звуки, отправка в Teams/Sheets.
+        </p>
+        <div class="tags">
+          <span class="tag">💻 Full HTML</span>
+          <span class="tag">🎮 Interactive Game</span>
+          <span class="tag">📊 Auto-Send</span>
+          <span class="tag">⚙️ 9th Grade</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy-game" onclick="copyActivePassiveGameCode()" style="cursor: pointer;">
+             Копировать код
+          </button>
+          <a href="https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/refs/heads/main/active-passive-portal.html" target="_blank" class="btn out" style="text-decoration: none;">
+            👁️ Открыть
+          </a>
+        </div>
+      </article>
     </div> <!-- ⚠️ ВОТ ЗДЕСЬ ЗАКРЫВАЕТСЯ СЕТКА КАРТОЧЕК! -->
 
      <!-- 📚 В разработке -->
@@ -2010,6 +2035,38 @@ const rawQuizData = [
           toast('❌ Ошибка копирования');
         } else {
           alert(' Не удалось скопировать. Попробуйте вручную.');
+        }
+      }
+    }
+        // === ФУНКЦИЯ КОПИРОВАНИЯ КОДА ИГРЫ ACTIVE & PASSIVE ===
+    async function copyActivePassiveGameCode() {
+      try {
+        const response = await fetch('https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/refs/heads/main/active-passive-portal.html');
+        const code = await response.text();
+        await navigator.clipboard.writeText(code);
+        
+        if (typeof toast === 'function') {
+          toast('✅ Код игры скопирован! ✨');
+        } else {
+          alert('✅ Код скопирован! Теперь вставь его в свой GitHub файл index.html');
+        }
+        
+        const btn = document.querySelector('.btn-copy-game[onclick="copyActivePassiveGameCode()"]');
+        if (btn) {
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '✓ Скопировано!';
+          btn.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = '';
+          }, 2500);
+        }
+      } catch (err) {
+        console.error('Failed to copy:', err);
+        if (typeof toast === 'function') {
+          toast('❌ Ошибка копирования');
+        } else {
+          alert('❌ Не удалось скопировать. Попробуйте вручную.');
         }
       }
     }
