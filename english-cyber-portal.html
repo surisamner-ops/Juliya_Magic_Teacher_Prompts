@@ -37,6 +37,7 @@
         @keyframes portalSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes planetFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
         @keyframes characterFly { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
+        @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
         @keyframes characterLand { 0% { transform: translateY(-100px) scale(1.1); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
         @keyframes starBurst { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 100% { transform: scale(2) rotate(180deg); opacity: 0; } }
         @keyframes floatMessage { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } 100% { opacity: 0; transform: translate(-50%, -80%) scale(1); } }
@@ -86,7 +87,7 @@
 
         .player-character { position: absolute; bottom: 80px; left: 5%; width: 150px; height: 150px; z-index: 3; transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1), bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1); overflow: visible !important; }
         .player-character svg { width: 100%; height: 100%; overflow: visible !important; animation: glow 2s ease-in-out infinite, breathe 3s ease-in-out infinite; }
-        .player-character.flying { animation: characterFly 1s ease-in-out infinite; }
+       .player-character.flying { animation: characterFly 1s ease-in-out infinite, floating 2s ease-in-out infinite; }
         .player-character.landing { animation: characterLand 0.6s ease-out; }
 
         .rocket-particle { position: absolute; width: 8px; height: 8px; background: radial-gradient(circle, var(--neon-green), var(--neon-blue)); border-radius: 50%; pointer-events: none; animation: rocketTrail 0.8s ease-out forwards; z-index: 2; box-shadow: 0 0 15px var(--neon-green); }
@@ -199,6 +200,7 @@
         .bonus-option.selected { background: rgba(57, 255, 20, 0.2); border-color: var(--neon-green); color: var(--neon-green); box-shadow: 0 0 25px rgba(57, 255, 20, 0.5); }
         .bonus-emoji { font-size: 1.3em; display: block; margin-bottom: 4px; }
 
+        /* === NEW: Reduce character size on final screen === */
         #resultCharacter {
             display: flex;
             justify-content: center;
@@ -283,19 +285,19 @@
     <div class="stars-bg" id="starsContainer"></div>
     <a href="../index.html" class="back-to-main" title="Back to main page">←</a>
     <div class="level-badge" id="levelBadge">Level 2: Type Answer</div>
-    <div class="tab-switch-warning" id="tabWarning">Tab Switches: <span id="tabSwitchCount">0</span></div>
+    <div class="tab-switch-warning" id="tabWarning">Tab switches: <span id="tabSwitchCount">0</span></div>
 
     <audio id="bgMusic" loop autoplay>
         <source src="background-music.mp3" type="audio/mpeg">
     </audio>
     <div class="music-control">
-        <button class="music-btn" id="musicToggle" onclick="toggleMusic()"></button>
+        <button class="music-btn" id="musicToggle" onclick="toggleMusic()">🔊</button>
     </div>
 
     <div class="main-wrapper">
         <div class="header">
             <h1 class="main-title">Cyber Portal</h1>
-            <p>Universal Game for Exam Preparation</p>
+            <p>Universal game for exam preparation</p>
         </div>
 
         <div class="screen active" id="screen-name">
@@ -311,7 +313,7 @@
         <div class="screen" id="screen-character">
             <div class="card">
                 <h2 style="font-family: 'Orbitron', monospace; color: var(--neon-blue); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 3px;">Choose Your Hero</h2>
-                <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9em;">Your space companion</p>
+                <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9em;">Your cosmic companion</p>
                 
                 <div class="character-select">
                     <div class="character-card" onclick="selectCharacter('astronaut', this)">
@@ -431,10 +433,10 @@
                     <div class="bonus-title">Choose Your Bonus</div>
                     <p style="color: #94a3b8; margin-bottom: 8px; font-size: 0.9em;">One bonus for your next test:</p>
                     <div class="bonus-options">
-                        <div class="bonus-option" onclick="selectBonus(this, 'hint')"><span class="bonus-emoji">💡</span>Hint on the test</div>
-                        <div class="bonus-option" onclick="selectBonus(this, 'no_hw')"><span class="bonus-emoji"></span>No Homework Pass</div>
+                       <div class="bonus-option" onclick="selectBonus(this, 'hint')"><span class="bonus-emoji">💡</span>Hint on the test</div>
+                        <div class="bonus-option" onclick="selectBonus(this, 'no_hw')"><span class="bonus-emoji">🎫</span>No Homework Pass</div>
                         <div class="bonus-option" onclick="selectBonus(this, 'extra_point')"><span class="bonus-emoji">⭐</span>+1 Extra Point</div>
-                        <div class="bonus-option" onclick="selectBonus(this, 'music')"><span class="bonus-emoji">🎵</span>Music During Break</div>
+                        <div class="bonus-option" onclick="selectBonus(this, 'music')"><span class="bonus-emoji">🎵</span>Music during the lesson</div>
                     </div>
                 </div>
                 <button class="btn" id="finishBtn" onclick="finishAndSend()" disabled>Finish & Send</button>
@@ -492,10 +494,38 @@
                 });
             }
         }
+        
+        function playFlySound() {
+            if (audioContext.state === 'suspended') audioContext.resume();
+            
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            osc.type = 'sine';
+            
+            osc.frequency.setValueAtTime(150, audioContext.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.6);
+            
+            gain.gain.setValueAtTime(0, audioContext.currentTime);
+            gain.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+            
+            osc.start(audioContext.currentTime);
+            osc.stop(audioContext.currentTime + 0.6);
+            
+            const player = document.getElementById('playerCharacter');
+            if (player) {
+                const rect = player.getBoundingClientRect();
+                createRocketTrail(rect.left + rect.width / 2, rect.top + rect.height);
+            }
+        }
 
         function toggleMusic() {
             const bg = document.getElementById('bgMusic'), btn = document.getElementById('musicToggle');
-            if (musicPlaying) { bg.pause(); btn.textContent = ''; musicPlaying = false; } 
+            if (musicPlaying) { bg.pause(); btn.textContent = '🔇'; musicPlaying = false; } 
             else { bg.play(); btn.textContent = '🔊'; musicPlaying = true; }
         }
 
@@ -555,11 +585,12 @@
         ];
         function getPlanetPositions() { return window.innerWidth <= 768 ? planetPositionsMobile : planetPositionsDesktop; }
         const planetPositions = getPlanetPositions();
-
+        
+        // === ENGLISH QUESTION DATABASE ===
         const questionDatabase = [
             { 
-                keyword: "Capital of France", 
-                question: "Which city is the capital of France?", 
+                keyword: "Geography", 
+                question: "What is the capital of France?", 
                 correct: "Paris", 
                 wrong1: "Lyon", 
                 wrong2: "Marseille", 
@@ -567,7 +598,7 @@
                 explanation: "Paris is the capital and largest city of France." 
             },
             { 
-                keyword: "Mathematics", 
+                keyword: "Math", 
                 question: "What is the square root of 144?", 
                 correct: "12", 
                 wrong1: "14", 
@@ -577,16 +608,16 @@
             },
             { 
                 keyword: "English Grammar", 
-                question: "Choose the correct form: 'She ___ to the store yesterday.'", 
-                correct: "went", 
-                wrong1: "go", 
-                wrong2: "gone", 
-                wrong3: "going",
-                explanation: "Past simple tense requires 'went' for irregular verb 'go'." 
+                question: "Choose the correct translation: 'I have never been to London'", 
+                correct: "I have never been to London", 
+                wrong1: "I never was in London", 
+                wrong2: "I have never went to London", 
+                wrong3: "I was never in London",
+                explanation: "Present Perfect is used with the adverb 'never'." 
             },
             { 
                 keyword: "Biology", 
-                question: "Which organelle is responsible for energy production in cells?", 
+                question: "Which organelle is responsible for energy production in the cell?", 
                 correct: "Mitochondria", 
                 wrong1: "Ribosome", 
                 wrong2: "Lysosome", 
@@ -600,7 +631,7 @@
                 wrong1: "1939", 
                 wrong2: "1941", 
                 wrong3: "1942",
-                explanation: "World War II ended in 1945 with the surrender of Germany and Japan." 
+                explanation: "World War II ended in 1945." 
             },
             { 
                 keyword: "Geography", 
@@ -625,8 +656,8 @@
                 question: "What is the chemical symbol for gold?", 
                 correct: "Au", 
                 wrong1: "Ag", 
-                wrong2: "Go", 
-                wrong3: "Gd",
+                wrong2: "Fe", 
+                wrong3: "Go",
                 explanation: "Au comes from the Latin word 'aurum' meaning gold." 
             }
         ];
@@ -635,6 +666,33 @@
         let startTime = null, timerInterval = null, selectedAnswer = null, currentPlanetIndex = 0;
         let questionsPerPlanet = 5, currentLevel = 1, selectedBonus = null, errorsList = [];
         const encouragingMessages = ["EXCELLENT!", "KEEP IT UP!", "AMAZING!", "PERFECT!", "GREAT JOB!", "BRILLIANT!", "SUPER!", "CORRECT!"];
+        
+        // === NEW FUNCTION: Movement from planet to planet with floating ===
+        function updateCharacterPosition() {
+            const player = document.getElementById('playerCharacter');
+            const totalQ = currentQuestions.length;
+            const totalPlanets = planetPositions.length;
+            
+            // Calculate progress from 0 to 1
+            const progress = totalQ > 1 ? (currentIndex / (totalQ - 1)) : 0;
+            
+            // Index of the current "virtual" planet (can be fractional)
+            const virtualPlanetIndex = progress * (totalPlanets - 1);
+            const planetIndex = Math.floor(virtualPlanetIndex);
+            const planetFraction = virtualPlanetIndex - planetIndex;
+            
+            // Get positions of current and next planet
+            const currentPlanet = planetPositions[Math.min(planetIndex, totalPlanets - 1)];
+            const nextPlanet = planetPositions[Math.min(planetIndex + 1, totalPlanets - 1)];
+            
+            // Interpolate between planets (smooth movement along trajectory)
+            const left = currentPlanet.left + (nextPlanet.left - currentPlanet.left) * planetFraction;
+            const bottom = currentPlanet.bottom + (nextPlanet.bottom - currentPlanet.bottom) * planetFraction;
+            
+            // Apply position
+            player.style.left = left + '%';
+            player.style.bottom = bottom + 'px';
+        }
 
         function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
         function showScreen(screenId) {
@@ -712,15 +770,14 @@
             document.getElementById('nextBtnLevel1').style.display = 'none';
             document.getElementById('nextBtnLevel2').style.display = 'none';
             
-            const planet = planetPositions[currentPlanetIndex], player = document.getElementById('playerCharacter');
-            player.classList.remove('flying'); player.classList.add('landing');
-            player.style.left = planet.left + '%'; 
-            if (window.innerWidth <= 768) {
-                player.style.bottom = '20px';
-            } else {
-                player.style.bottom = (planet.bottom + 20) + 'px';
-            }
-            setTimeout(() => { player.classList.remove('landing'); }, 600);
+            const player = document.getElementById('playerCharacter');
+            
+            // Call the new smooth movement function
+            updateCharacterPosition();
+            
+            // Character continues to fly, not landing
+            player.classList.remove('landing');
+            player.classList.add('flying');
             
             if (currentLevel === 1) {
                 document.getElementById('answerSlot').textContent = 'Your Answer: ?';
@@ -868,11 +925,16 @@
             playSound('click'); 
             currentIndex++;
             updateProgress();
-            if (currentIndex % questionsPerPlanet === 0 && currentIndex < currentQuestions.length) {
-                currentPlanetIndex = (currentPlanetIndex + 1) % 8;
+            
+            if (currentIndex < currentQuestions.length) {
+                // Play fly sound only if it's not the very first start
+                if (currentIndex > 0) {
+                    playFlySound();
+                }
+                loadQuestion();
+            } else {
+                showResults();
             }
-            if (currentIndex < currentQuestions.length) loadQuestion();
-            else showResults();
         }
 
         function selectBonus(element, bonusType) {
@@ -880,7 +942,7 @@
             document.querySelectorAll('.bonus-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected'); selectedBonus = bonusType;
             document.getElementById('finishBtn').disabled = false;
-            const bonusNames = { 'hint': 'Hint on the test', 'no_hw': 'No Homework Pass', 'extra_point': '+1 Extra Point', 'music': 'Music During Break' };
+            const bonusNames = { 'hint': 'Hint on the test', 'no_hw': 'No Homework Pass', 'extra_point': '+1 Extra Point', 'music': 'Music during the lesson' };
             document.getElementById('finishBtn').textContent = `Confirm: ${bonusNames[bonusType]}`;
         }
 
@@ -896,7 +958,7 @@
             const timeSpent = `${Math.floor(elapsed / 60)}m ${elapsed % 60}s`;
             let message = percentage === 100 ? 'PERFECT! You are a true expert!' : 
                           percentage >= 80 ? 'Excellent work! Almost perfect!' : 
-                          percentage >= 60 ? 'Good job! Keep practicing!' : 'Don\'t give up! Practice makes perfect!';
+                          percentage >= 60 ? 'Good result! Keep practicing!' : 'Don\'t give up! Practice is the key to success!';
             document.getElementById('finalScore').innerHTML = `${message}<br><br>Portals activated: <b>${score} out of ${currentQuestions.length}</b><br>Accuracy: <b>${percentage}%</b><br>Time: <b>${timeSpent}</b><br>Tab switches: <b>${tabSwitchCount}</b>`;
             selectedBonus = null;
             document.querySelectorAll('.bonus-option').forEach(opt => opt.classList.remove('selected'));
@@ -912,7 +974,7 @@
             const percentage = Math.round((score / currentQuestions.length) * 100);
             const elapsed = Math.floor((Date.now() - startTime) / 1000);
             const timeSpent = `${Math.floor(elapsed / 60)} min ${elapsed % 60} sec`;
-            const bonusNames = { 'hint': 'Hint on the test', 'no_hw': 'No Homework Pass', 'extra_point': '+1 Extra Point', 'music': 'Music During Break' };
+            const bonusNames = { 'hint': 'Hint on the test', 'no_hw': 'No Homework Pass', 'extra_point': '+1 Extra Point', 'music': 'Music during the lesson' };
             let errorsText = errorsList.length > 0 ? errorsList.map((e, idx) => `${idx + 1}. ${e.question}: student answer "${e.studentAnswer}", correct: "${e.correctAnswer}"`).join('\n') : 'No errors! Perfect performance!';
             
             const payload = { 
@@ -938,7 +1000,7 @@
             } catch (e) { console.log('Sheets error:', e); }
             
             setTimeout(() => {
-                alert(`Mission Complete, ${studentName}!\n\nYour bonus: ${bonusNames[selectedBonus]}\n\nResults sent to teacher.`);
+                alert(`Mission Complete, ${studentName}!\n\nYour bonus: ${bonusNames[selectedBonus]}\n\nResults sent to the teacher.`);
                 window.location.href = '../index.html';
             }, 3000);
         }
