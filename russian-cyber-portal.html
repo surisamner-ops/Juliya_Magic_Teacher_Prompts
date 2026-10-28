@@ -37,6 +37,7 @@
         @keyframes portalSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes planetFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
         @keyframes characterFly { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
+        @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
         @keyframes characterLand { 0% { transform: translateY(-100px) scale(1.1); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
         @keyframes starBurst { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 100% { transform: scale(2) rotate(180deg); opacity: 0; } }
         @keyframes floatMessage { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } 100% { opacity: 0; transform: translate(-50%, -80%) scale(1); } }
@@ -86,7 +87,7 @@
 
         .player-character { position: absolute; bottom: 80px; left: 5%; width: 150px; height: 150px; z-index: 3; transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1), bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1); overflow: visible !important; }
         .player-character svg { width: 100%; height: 100%; overflow: visible !important; animation: glow 2s ease-in-out infinite, breathe 3s ease-in-out infinite; }
-        .player-character.flying { animation: characterFly 1s ease-in-out infinite; }
+       .player-character.flying { animation: characterFly 1s ease-in-out infinite, floating 2s ease-in-out infinite; }
         .player-character.landing { animation: characterLand 0.6s ease-out; }
 
         .rocket-particle { position: absolute; width: 8px; height: 8px; background: radial-gradient(circle, var(--neon-green), var(--neon-blue)); border-radius: 50%; pointer-events: none; animation: rocketTrail 0.8s ease-out forwards; z-index: 2; box-shadow: 0 0 15px var(--neon-green); }
@@ -432,10 +433,10 @@
                     <div class="bonus-title">Выберите бонус</div>
                     <p style="color: #94a3b8; margin-bottom: 8px; font-size: 0.9em;">Один бонус на следующую проверку:</p>
                     <div class="bonus-options">
-                        <div class="bonus-option" onclick="selectBonus(this, 'hint')"><span class="bonus-emoji"></span>Подсказка на контрольной</div>
+                       <div class="bonus-option" onclick="selectBonus(this, 'hint')"><span class="bonus-emoji">💡</span>Подсказка на контрольной</div>
                         <div class="bonus-option" onclick="selectBonus(this, 'no_hw')"><span class="bonus-emoji">🎫</span>Анти-двойка / Без ДЗ</div>
                         <div class="bonus-option" onclick="selectBonus(this, 'extra_point')"><span class="bonus-emoji">⭐</span>+1 доп. балл</div>
-                        <div class="bonus-option" onclick="selectBonus(this, 'music')"><span class="bonus-emoji">🎵</span>Музыка на перемене</div>
+                        <div class="bonus-option" onclick="selectBonus(this, 'music')"><span class="bonus-emoji">🎵</span>Музыка во время урока</div>
                     </div>
                 </div>
                 <button class="btn" id="finishBtn" onclick="finishAndSend()" disabled>Завершить и отправить</button>
@@ -493,6 +494,34 @@
                 });
             }
         }
+              function playFlySound() {
+    if (audioContext.state === 'suspended') audioContext.resume();
+    
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+    
+    osc.type = 'sine';
+    
+    osc.frequency.setValueAtTime(150, audioContext.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.6);
+    
+    gain.gain.setValueAtTime(0, audioContext.currentTime);
+    gain.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.1);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+    
+    osc.start(audioContext.currentTime);
+    osc.stop(audioContext.currentTime + 0.6);
+    
+    // ✅ ИСПРАВЛЕНИЕ: получаем player внутри функции
+    const player = document.getElementById('playerCharacter');
+    if (player) {
+        const rect = player.getBoundingClientRect();
+        createRocketTrail(rect.left + rect.width / 2, rect.top + rect.height);
+    }
+}
 
         function toggleMusic() {
             const bg = document.getElementById('bgMusic'), btn = document.getElementById('musicToggle');
@@ -556,7 +585,6 @@
         ];
         function getPlanetPositions() { return window.innerWidth <= 768 ? planetPositionsMobile : planetPositionsDesktop; }
         const planetPositions = getPlanetPositions();
-
         const questionDatabase = [
             { 
                 keyword: "Столица Франции", 
@@ -636,7 +664,33 @@
         let startTime = null, timerInterval = null, selectedAnswer = null, currentPlanetIndex = 0;
         let questionsPerPlanet = 5, currentLevel = 1, selectedBonus = null, errorsList = [];
         const encouragingMessages = ["ОТЛИЧНО!", "ТАК ДЕРЖАТЬ!", "ПОТРЯСАЮЩЕ!", "ИДЕАЛЬНО!", "МОЛОДЕЦ!", "БЛЕСТЯЩЕ!", "СУПЕР!", "ВЕРНО!"];
-
+        // === НОВАЯ ФУНКЦИЯ: Равномерное движение к порталу ===
+              // === НОВАЯ ФУНКЦИЯ: Движение от планеты к планете с парением ===
+       function updateCharacterPosition() {
+    const player = document.getElementById('playerCharacter');
+    const totalQ = currentQuestions.length;
+    const totalPlanets = planetPositions.length;
+    
+    // Рассчитываем прогресс от 0 до 1
+    const progress = totalQ > 1 ? (currentIndex / (totalQ - 1)) : 0;
+    
+    // Индекс текущей "виртуальной" планеты (может быть дробным)
+    const virtualPlanetIndex = progress * (totalPlanets - 1);
+    const planetIndex = Math.floor(virtualPlanetIndex);
+    const planetFraction = virtualPlanetIndex - planetIndex;
+    
+    // Получаем позиции текущей и следующей планеты
+    const currentPlanet = planetPositions[Math.min(planetIndex, totalPlanets - 1)];
+    const nextPlanet = planetPositions[Math.min(planetIndex + 1, totalPlanets - 1)];
+    
+    // Интерполируем между планетами (плавное движение по траектории)
+    const left = currentPlanet.left + (nextPlanet.left - currentPlanet.left) * planetFraction;
+    const bottom = currentPlanet.bottom + (nextPlanet.bottom - currentPlanet.bottom) * planetFraction;
+    
+    // Применяем позицию
+    player.style.left = left + '%';
+    player.style.bottom = bottom + 'px';
+}
         function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -713,15 +767,14 @@
             document.getElementById('nextBtnLevel1').style.display = 'none';
             document.getElementById('nextBtnLevel2').style.display = 'none';
             
-            const planet = planetPositions[currentPlanetIndex], player = document.getElementById('playerCharacter');
-            player.classList.remove('flying'); player.classList.add('landing');
-            player.style.left = planet.left + '%'; 
-            if (window.innerWidth <= 768) {
-                player.style.bottom = '20px';
-            } else {
-                player.style.bottom = (planet.bottom + 20) + 'px';
-            }
-            setTimeout(() => { player.classList.remove('landing'); }, 600);
+                            const player = document.getElementById('playerCharacter');
+            
+            // Вызываем новую функцию равномерного движения
+            updateCharacterPosition();
+            
+            // Персонаж продолжает лететь, не приземляясь
+            player.classList.remove('landing');
+            player.classList.add('flying');
             
             if (currentLevel === 1) {
                 document.getElementById('answerSlot').textContent = 'Ваш ответ: ?';
@@ -865,17 +918,21 @@
             }
         }
 
-        function nextQuestion() {
+                    function nextQuestion() {
             playSound('click'); 
             currentIndex++;
             updateProgress();
-            if (currentIndex % questionsPerPlanet === 0 && currentIndex < currentQuestions.length) {
-                currentPlanetIndex = (currentPlanetIndex + 1) % 8;
+            
+            if (currentIndex < currentQuestions.length) {
+                // Проигрываем звук полета только если это не самый первый старт
+                if (currentIndex > 0) {
+                    playFlySound();
+                }
+                loadQuestion();
+            } else {
+                showResults();
             }
-            if (currentIndex < currentQuestions.length) loadQuestion();
-            else showResults();
         }
-
         function selectBonus(element, bonusType) {
             playSound('select');
             document.querySelectorAll('.bonus-option').forEach(opt => opt.classList.remove('selected'));
