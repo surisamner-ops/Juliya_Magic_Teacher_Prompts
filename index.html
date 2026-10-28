@@ -1078,6 +1078,173 @@ const rawQuizData = [
           </a>
         </div>
       </article>
+            <!-- 🎮 Card: Шаблон игры (Русский) -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🇷🇺</span>
+          <h2 class="card-title">Шаблон игры: Кибер-портал (RU)</h2>
+        </div>
+        <p class="card-desc">
+          <strong>Полный код универсальной игры на русском языке.</strong><br>
+          2 уровня сложности, персонажи, звуки, объяснения ошибок и авто-отправка результатов в Teams/Google Sheets.
+        </p>
+        <div class="tags">
+          <span class="tag">💻 Full HTML</span>
+          <span class="tag">🇷🇺 Русский</span>
+          <span class="tag">📊 Auto-Send</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy-game" onclick="copyRussianGameCode()" style="cursor: pointer;">📋 Копировать код</button>
+          <a href="https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/refs/heads/main/russian-cyber-portal.html" target="_blank" class="btn out" style="text-decoration: none;">👁️ Открыть</a>
+        </div>
+      </article>
+
+      <!-- 🎮 Card: Game Template (English) -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🇬🇧</span>
+          <h2 class="card-title">Game Template: Cyber Portal (EN)</h2>
+        </div>
+        <p class="card-desc">
+          <strong>Full code of the universal game in English.</strong><br>
+          2 difficulty levels, characters, sounds, error explanations, and auto-sending results to Teams/Google Sheets.
+        </p>
+        <div class="tags">
+          <span class="tag">💻 Full HTML</span>
+          <span class="tag">🇬🇧 English</span>
+          <span class="tag">📊 Auto-Send</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy-game" onclick="copyEnglishGameCode()" style="cursor: pointer;">📋 Copy Code</button>
+          <a href="https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/refs/heads/main/english-cyber-portal.html" target="_blank" class="btn out" style="text-decoration: none;">👁️ Open</a>
+        </div>
+      </article>
+      <!-- 🤖 Card: Промпт для генерации вопросов -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🤖</span>
+          <h2 class="card-title">Промпт для генерации вопросов</h2>
+        </div>
+        <p class="card-desc">
+          <strong>Сгенерируй 30 вопросов для своей игры!</strong><br>
+          Скопируй промпт, вставь в Qwen/ChatGPT/Claude, укажи свою тему и уровень. Нейросеть выдаст вопросы в идеальном формате для кода.
+        </p>
+        <div class="tags">
+          <span class="tag">🤖 AI Prompt</span>
+          <span class="tag">❓ 30 Questions</span>
+          <span class="tag">⚙️ Auto-Format</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="promptQuestions">📋 Копировать</button>
+          <button class="btn out" data-download="promptQuestions">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="promptQuestions">👁️ Показать промпт ▼</button>
+        <div class="code" id="promptQuestions">Ты — эксперт-методист с 20-летним стажем. Создай банк из 30 вопросов для интерактивной образовательной игры "Cyber Portal".
+
+📚 ПРЕДМЕТ: [ВСТАВЬ СВОЙ ПРЕДМЕТ, например: Английский язык]
+🎯 ТЕМА: [ВСТАВЬ ТЕМУ, например: Present Perfect]
+📊 УРОВЕНЬ: [ВСТАВЬ КЛАСС/УРОВЕНЬ, например: 8 класс, A2-B1]
+
+⚠️ КРИТИЧЕСКИ ВАЖНО: Выдай результат СТРОГО в формате JavaScript-массива. Не пиши вступлений и пояснений. Начни с `const questionDatabase = [` и закончи `];`.
+
+Каждый вопрос — объект в таком формате:
+{
+    keyword: "Краткая тема (1-2 слова)",
+    question: "Текст вопроса или задания",
+    correct: "Правильный ответ (1-3 слова)",
+    wrong1: "Неправильный вариант 1",
+    wrong2: "Неправильный вариант 2",
+    wrong3: "Неправильный вариант 3",
+    explanation: "Краткое объяснение правильного ответа (1-2 предложения)."
+},
+
+🚨 ПРАВИЛА:
+1. Поле `correct` НЕ должно совпадать с полем `keyword`!
+   ❌ НЕПРАВИЛЬНО: keyword: "Париж", correct: "Париж"
+   ✅ ПРАВИЛЬНО: keyword: "Столицы", correct: "Париж"
+2. Поле `correct` должно быть КОРОТКИМ (1-3 слова) — ученик будет вводить его вручную на 2-м уровне.
+3. wrong1, wrong2, wrong3 — реалистичные дистракторы (типичные ошибки), а не случайные слова.
+4. `explanation` ОБЯЗАТЕЛЬНО для каждого вопроса! Пиши как объяснение ученику.
+5. Чередуй типы заданий: факты, применение, определения, примеры.
+6. Всего ровно 30 вопросов.
+
+ПРИМЕР (не включай в вывод):
+{
+    keyword: "Столицы Европы",
+    question: "Какой город является столицей Франции?",
+    correct: "Paris",
+    wrong1: "Lyon",
+    wrong2: "Marseille",
+    wrong3: "Nice",
+    explanation: "Paris is the capital and largest city of France."
+},
+
+Сгенерируй массив из 30 вопросов прямо сейчас.</div>
+      </article>
+
+      <!-- 🚀 Card: Пошаговая инструкция -->
+      <article class="card">
+        <div class="card-head">
+          <span class="card-emoji">🚀</span>
+          <h2 class="card-title">Инструкция: Создай свою игру за 15 мин</h2>
+        </div>
+        <p class="card-desc">
+          <strong>Пошаговый гайд для учителей.</strong><br>
+          От генерации вопросов до публикации на GitHub с автоматической отправкой результатов в Teams и Google Sheets.
+        </p>
+        <div class="tags">
+          <span class="tag">📝 Пошаговый гайд</span>
+          <span class="tag">🌐 GitHub Pages</span>
+          <span class="tag">📊 Auto-Send</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn-copy" data-target="guideText">📋 Копировать</button>
+          <button class="btn out" data-download="guideText">💾 .txt</button>
+        </div>
+        <button class="toggle" data-toggle="guideText">👁️ Показать инструкцию ▼</button>
+        <div class="code" id="guideText">🚀 ПОШАГОВЫЙ АЛГОРИТМ СОЗДАНИЯ СВОЕЙ ИГРЫ (15 минут)
+
+ШАГ 1. Скопируй шаблон игры
+Зайди на этот сайт, найди карточку "Шаблон игры: Кибер-портал" и нажми "📋 Копировать код".
+
+ШАГ 2. Создай репозиторий на GitHub
+1. Зайди на github.com и войди в аккаунт.
+2. Нажми "+" (справа вверху) → "New repository".
+3. Имя: my-game (или любое другое на латинице).
+4. Выбери Public ✅, поставь галочку "Add a README file".
+5. Нажми "Create repository".
+
+ШАГ 3. Загрузи шаблон
+1. В новом репозитории нажми "Add file" → "Create new file".
+2. В поле имени файла напиши: index.html
+3. Вставь скопированный код игры.
+4. Нажми зеленую кнопку "Commit changes...".
+
+ШАГ 4. Сгенерируй вопросы через ИИ
+1. Открой Qwen / ChatGPT / Claude.
+2. Вставь промпт из соседней карточки, заменив предмет/тему/уровень на свои.
+3. Скопируй полученный ответ нейросети (от `const questionDatabase = [` до `];`).
+
+ШАГ 5. Замени вопросы и название в коде
+1. В репозитории открой файл index.html → нажми иконку карандаша ✏️ (Edit).
+2. Нажми Ctrl+F → найди `const questionDatabase = [`.
+3. Выдели весь старый массив вопросов до закрывающей `];` → удали его → вставь свой новый.
+4. Нажми Ctrl+F → найди `Кибер-портал` → замени на своё название игры (например, "Math Quest").
+5. Нажми "Commit changes".
+
+ШАГ 6. Включи сайт (GitHub Pages)
+1. В репозитории нажми "Settings" (справа вверху).
+2. В меню слева найди раздел "Pages".
+3. В пункте Branch: выбери main → Folder: / (root) → нажми "Save".
+4. Подожди 1-2 минуты (обнови страницу).
+5. Сверху появится ссылка вида: https://твой-логин.github.io/my-game/
+6. Скопируй эту ссылку!
+
+ШАГ 7. Проверь и отправь ученикам
+1. Открой скопированную ссылку → пройди игру сам.
+2. Убедись, что вопросы корректны и всё работает.
+3. Отправь ссылку ученикам. Результаты автоматически придут в Microsoft Teams и Google Sheets!</div>
+      </article>
     </div> <!-- ⚠️ ВОТ ЗДЕСЬ ЗАКРЫВАЕТСЯ СЕТКА КАРТОЧЕК! -->
 
      <!-- 📚 В разработке -->
