@@ -2237,6 +2237,50 @@ const rawQuizData = [
         }
       }
     }
+        // === УНИВЕРСАЛЬНАЯ ФУНКЦИЯ КОПИРОВАНИЯ ИГР ===
+    async function copyGameFromURL(url, buttonElement, successMessage) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('File not found');
+        }
+        const code = await response.text();
+        await navigator.clipboard.writeText(code);
+        
+        if (typeof toast === 'function') {
+          toast(successMessage);
+        }
+        
+        // Меняем текст кнопки
+        const originalText = buttonElement.innerHTML;
+        buttonElement.innerHTML = '✓ Скопировано!';
+        buttonElement.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+        setTimeout(() => {
+          buttonElement.innerHTML = originalText;
+          buttonElement.style.background = '';
+        }, 2500);
+        
+      } catch (err) {
+        console.error('Copy error:', err);
+        if (typeof toast === 'function') {
+          toast('❌ Ошибка копирования');
+        } else {
+          alert(' Не удалось скопировать код');
+        }
+      }
+    }
+
+    // === КОПИРОВАНИЕ РУССКОЙ ВЕРСИИ ===
+    async function copyRussianGameCode() {
+      const url = 'https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/main/russian-cyber-portal.html';
+      await copyGameFromURL(url, event.currentTarget, '✅ Русский код скопирован! ✨');
+    }
+
+    // === КОПИРОВАНИЕ АНГЛИЙСКОЙ ВЕРСИИ ===
+    async function copyEnglishGameCode() {
+      const url = 'https://raw.githubusercontent.com/surisamner-ops/Juliya_Magic_Teacher_Prompts/main/english-cyber-portal.html';
+      await copyGameFromURL(url, event.currentTarget, '✅ English code copied! ✨');
+    }
   </script>
 </body>
 </html>
